@@ -61,7 +61,7 @@ export default class LondonCycle extends React.Component<Props, State> {
   };
 
   public UNSAFE_componentWillMount() {
-    getCycleStations().then(res => {
+    getCycleStations().then((res) => {
       this.setState(({ stations }) => ({
         stations: {
           ...stations,
@@ -114,22 +114,22 @@ export default class LondonCycle extends React.Component<Props, State> {
             <Feature
               key={stationK}
               onMouseEnter={
-                (this.onToggleHover.bind(
+                this.onToggleHover.bind(
                   this,
                   'pointer'
-                ) as unknown) as React.MouseEventHandler<HTMLElement>
+                ) as unknown as React.MouseEventHandler<HTMLElement>
               }
               onMouseLeave={
-                (this.onToggleHover.bind(
+                this.onToggleHover.bind(
                   this,
                   ''
-                ) as unknown) as React.MouseEventHandler<HTMLElement>
+                ) as unknown as React.MouseEventHandler<HTMLElement>
               }
               onClick={
-                (this.markerClick.bind(
+                this.markerClick.bind(
                   this,
                   stations[stationK]
-                ) as unknown) as React.MouseEventHandler<HTMLElement>
+                ) as unknown as React.MouseEventHandler<HTMLElement>
               }
               coordinates={stations[stationK].position}
             />

@@ -385,12 +385,8 @@ const ReactMapboxFactory = ({
     };
 
     public render() {
-      const {
-        containerStyle,
-        className,
-        children,
-        renderChildrenInPortal
-      } = this.props;
+      const { containerStyle, className, children, renderChildrenInPortal } =
+        this.props;
 
       const { ready, map } = this.state;
 

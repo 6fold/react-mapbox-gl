@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig",
+  "extends": "./tsconfig-cjs",
   "compilerOptions": {
     "module": "esnext",
     "outDir": "lib-esm"

@@ -13,7 +13,13 @@ export function withMap<T extends { map: MapboxGl.Map | undefined }>(
   ) {
     return (
       <MapContext.Consumer>
-        {map => <Component map={map} {...props as T} />}
+        {(map) => (
+          <Component
+            // @ts-expect-error
+            map={map}
+            {...(props as T)}
+          />
+        )}
       </MapContext.Consumer>
     );
   };

@@ -4,7 +4,7 @@ jest.mock('mapbox-gl', () => ({
 
 import * as React from 'react';
 import ReactMapboxGl, { FitBounds } from '../map';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import { getMapMock } from '../jest/util';
 
 let mockfitBounds = jest.fn();
@@ -34,18 +34,21 @@ describe('Map', () => {
       accessToken: '',
       mapInstance: getMock() as any
     });
-    mount(<MapboxMap style="" />);
+    render(<MapboxMap style="" />);
   });
 
   it('Should call fitBounds with the right parameters', () => {
-    const fitBoundsValues: FitBounds = [[0, 1], [2, 3]];
+    const fitBoundsValues: FitBounds = [
+      [0, 1],
+      [2, 3]
+    ];
     const fitBoundsOptions = { linear: true };
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock() as any
     });
 
-    mount(
+    render(
       <MapboxMap
         style=""
         fitBounds={fitBoundsValues}
@@ -60,9 +63,12 @@ describe('Map', () => {
 
   it('Should update fitBounds if fitBoundsOptions changes', () => {
     const flyTo = jest.fn();
-    const fitBoundsValues: FitBounds = [[0, 1], [2, 3]];
+    const fitBoundsValues: FitBounds = [
+      [0, 1],
+      [2, 3]
+    ];
     const fitBoundsOptions = { offset: [150, 0] as [number, number] };
-    const newFitBoundsOptions = { offset: [0, 0] };
+    const newFitBoundsOptions = { offset: [0, 0] as [number, number] };
 
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
@@ -72,7 +78,7 @@ describe('Map', () => {
       }) as any
     });
 
-    const wrapper = mount(
+    const { rerender } = render(
       <MapboxMap
         style=""
         fitBounds={fitBoundsValues}
@@ -80,17 +86,26 @@ describe('Map', () => {
       />
     );
 
-    wrapper.setProps({ fitBoundsOptions: newFitBoundsOptions });
+    rerender(
+      <MapboxMap
+        style=""
+        fitBounds={fitBoundsValues}
+        fitBoundsOptions={newFitBoundsOptions}
+      />
+    );
 
     expect(mockfitBounds.mock.calls[1][1]).toBe(newFitBoundsOptions);
   });
 
   it.skip('Should calc the center from fitbounds if center is not given', () => {
-    const fitBoundsValues: FitBounds = [[0, 3], [2, 9]];
+    const fitBoundsValues: FitBounds = [
+      [0, 3],
+      [2, 9]
+    ];
     const mockMap = getMock() as any;
     const MapboxMap = ReactMapboxGl({ accessToken: '', mapInstance: mockMap });
 
-    mount(<MapboxMap style="" fitBounds={fitBoundsValues} />);
+    render(<MapboxMap style="" fitBounds={fitBoundsValues} />);
 
     // tslint:disable-next-line:no-any
     const lastCall: any = mockMap.mock.calls[mockMap.mock.calls.length - 1];
@@ -103,14 +118,14 @@ describe('Map', () => {
       mapInstance: getMock() as any
     });
 
-    mount(<MapboxMap style="" onStyleLoad={jest.fn()} />);
+    render(<MapboxMap style="" onStyleLoad={jest.fn()} />);
 
-    expect(mockon).toBeCalledWith('load', jasmine.any(Function));
+    expect(mockon).toBeCalledWith('load', expect.any(Function));
   });
 
   it('Should update the map center position', () => {
     const flyTo = jest.fn();
-    const center = [3, 4];
+    const center: [number, number] = [3, 4];
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock({
@@ -118,16 +133,19 @@ describe('Map', () => {
       }) as any
     });
 
-    const wrapper = mount(<MapboxMap style="" center={[1, 2]} />);
+    const { rerender } = render(<MapboxMap style="" center={[1, 2]} />);
 
-    wrapper.setProps({ center });
+    rerender(<MapboxMap style="" center={center} />);
 
     expect(flyTo.mock.calls[0][0].center).toEqual(center);
   });
 
   it('Should update maxBounds', () => {
     const flyTo = jest.fn();
-    const maxBoundsProps = [[1, 0], [0, 1]];
+    const maxBoundsProps: FitBounds = [
+      [1, 0],
+      [0, 1]
+    ];
     const mockMaxBounds = jest.fn();
 
     const MapboxMap = ReactMapboxGl({
@@ -138,8 +156,9 @@ describe('Map', () => {
       }) as any
     });
 
-    const wrapper = mount(<MapboxMap style="" />);
-    wrapper.setProps({ maxBounds: maxBoundsProps });
+    const { rerender } = render(<MapboxMap style="" />);
+
+    rerender(<MapboxMap style="" maxBounds={maxBoundsProps} />);
 
     expect(mockMaxBounds).toBeCalledWith(maxBoundsProps);
   });
@@ -156,9 +175,9 @@ describe('Map', () => {
 
     const zoom: [number] = [3];
 
-    const wrapper = mount(<MapboxMap style="" zoom={zoom} />);
+    const { rerender } = render(<MapboxMap style="" zoom={zoom} />);
 
-    wrapper.setProps({ zoom });
+    rerender(<MapboxMap style="" zoom={zoom} />);
 
     expect(flyTo).not.toHaveBeenCalled();
   });
@@ -172,9 +191,9 @@ describe('Map', () => {
       }) as any
     });
 
-    const wrapper = mount(<MapboxMap style="" zoom={[1]} />);
+    const { rerender } = render(<MapboxMap style="" zoom={[1]} />);
 
-    wrapper.setProps({ zoom: [1] });
+    rerender(<MapboxMap style="" zoom={[1]} />);
 
     expect(flyTo).toHaveBeenCalled();
   });
@@ -190,9 +209,9 @@ describe('Map', () => {
     });
     const bearing: [number] = [3];
 
-    const wrapper = mount(<MapboxMap style="" bearing={bearing} />);
+    const { rerender } = render(<MapboxMap style="" bearing={bearing} />);
 
-    wrapper.setProps({ bearing });
+    rerender(<MapboxMap style="" bearing={bearing} />);
 
     expect(flyTo).not.toHaveBeenCalled();
   });
@@ -206,9 +225,9 @@ describe('Map', () => {
       }) as any
     });
 
-    const wrapper = mount(<MapboxMap style="" bearing={[1]} />);
+    const { rerender } = render(<MapboxMap style="" bearing={[1]} />);
 
-    wrapper.setProps({ bearing: [1] });
+    rerender(<MapboxMap style="" bearing={[1]} />);
 
     expect(flyTo).toHaveBeenCalled();
   });
@@ -224,9 +243,9 @@ describe('Map', () => {
     });
     const pitch: [number] = [3];
 
-    const wrapper = mount(<MapboxMap style="" pitch={pitch} />);
+    const { rerender } = render(<MapboxMap style="" pitch={pitch} />);
 
-    wrapper.setProps({ pitch });
+    rerender(<MapboxMap style="" pitch={pitch} />);
 
     expect(flyTo).not.toHaveBeenCalled();
   });
@@ -240,9 +259,9 @@ describe('Map', () => {
       }) as any
     });
 
-    const wrapper = mount(<MapboxMap style="" pitch={[1]} />);
+    const { rerender } = render(<MapboxMap style="" pitch={[1]} />);
 
-    wrapper.setProps({ pitch: [1] });
+    rerender(<MapboxMap style="" pitch={[1]} />);
 
     expect(flyTo).toHaveBeenCalled();
   });
@@ -264,7 +283,7 @@ describe('Map', () => {
       offset: [20, 60]
     };
 
-    const wrapper = mount(
+    const { rerender } = render(
       <MapboxMap
         style=""
         zoom={zoom}
@@ -273,7 +292,14 @@ describe('Map', () => {
       />
     );
 
-    wrapper.setProps({ zoom: [1] });
+    rerender(
+      <MapboxMap
+        style=""
+        zoom={[1]}
+        flyToOptions={flyToOptions}
+        animationOptions={animationOptions}
+      />
+    );
 
     expect(flyTo.mock.calls[0][0]).toEqual({
       ...flyToOptions,

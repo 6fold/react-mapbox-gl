@@ -1,19 +1,19 @@
 import * as React from 'react';
 import layerMouseTouchEvents from '../layer-events-hoc';
-import { MockComponent, mountWithMap, getMapMock } from '../jest/util';
+import { MockComponent, renderWithMap, getMapMock } from '../jest/util';
 import { withMap } from '../context';
 
 const LayerHOC = withMap(layerMouseTouchEvents(MockComponent));
 
 describe('layer-events-hoc', () => {
   it('Should default the id if none is passed', () => {
-    const res = mountWithMap(<LayerHOC />, getMapMock());
-    expect(res.find('h1').text()).toBe('layer-1');
+    const { container } = renderWithMap(<LayerHOC />, getMapMock());
+    expect(container.querySelector('h1')).toHaveTextContent('layer-1');
   });
 
   it('should listen all mouse and touch events', () => {
     const mapMock = getMapMock();
-    mountWithMap(<LayerHOC />, mapMock);
+    renderWithMap(<LayerHOC />, mapMock);
 
     const events = [
       'click',
@@ -23,6 +23,6 @@ describe('layer-events-hoc', () => {
       'touchstart'
     ];
 
-    expect(mapMock.on.mock.calls.map(call => call[0])).toEqual(events);
+    expect(mapMock.on.mock.calls.map((call) => call[0])).toEqual(events);
   });
 });

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import Layer, { ImageDefinitionWithOptions } from '../layer';
 import { getMapMock } from '../jest/util';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 
 describe('Layer', () => {
   it('Should render layer with default options', () => {
     const children = [{ props: {}, type: 'symbol', key: '1' }];
     const mockMap = getMapMock();
     // tslint:disable-next-line:no-any
-    mount(<Layer id="1" map={mockMap as any} children={children} />);
+    render(<Layer id="1" map={mockMap as any} children={children} />);
 
     expect(mockMap.addLayer.mock.calls[0]).toEqual([
       {
@@ -43,7 +43,7 @@ describe('Layer', () => {
       sourceId: 'test'
     };
 
-    mount(
+    render(
       <Layer
         children={children}
         // tslint:disable-next-line:no-any
@@ -70,7 +70,7 @@ describe('Layer', () => {
     const mockMap = getMapMock({ getSource: jest.fn(() => undefined) });
 
     // tslint:disable-next-line:no-any
-    mount(<Layer id="1" map={mockMap as any} children={children} />);
+    render(<Layer id="1" map={mockMap as any} children={children} />);
 
     expect(mockMap.addSource.mock.calls[0]).toEqual([
       '1',
@@ -97,7 +97,7 @@ describe('Layer', () => {
       clusterMaxZoom: 10
     };
     const layerSourceId = 'testId';
-    mount(
+    render(
       <Layer
         children={children}
         // tslint:disable-next-line:no-any
@@ -125,7 +125,7 @@ describe('Layer', () => {
     const feature = { coordinates: [-123, 45] };
     const children = [{ props: feature, type: 'symbol', key: '1' }];
 
-    mount(
+    render(
       // tslint:disable-next-line:no-any
       <Layer id="1" map={mockMap as any} children={children} />
     );
@@ -149,12 +149,15 @@ describe('Layer', () => {
     const feature = { coordinates: [-123, 45] };
     const children = [{ props: feature, type: 'symbol', key: '1' }];
 
-    const layer = mount(
+    const { rerender } = render(
       // tslint:disable-next-line:no-any
       <Layer id="1" map={mockMap as any} children={children} />
     );
 
-    layer.setProps({ children: undefined });
+    rerender(
+      // tslint:disable-next-line:no-any
+      <Layer id="1" map={mockMap as any} children={undefined} />
+    );
 
     expect(mockMap.getSource().setData.mock.calls[1]).toEqual([
       {
@@ -174,7 +177,7 @@ describe('Layer', () => {
     ];
 
     // tslint:disable-next-line:no-any
-    mount(<Layer id="1" map={mockMap as any} children={children} />);
+    render(<Layer id="1" map={mockMap as any} children={children} />);
 
     expect(mockMap.getSource().setData.mock.calls[0][0].features).toHaveLength(
       3
@@ -186,7 +189,7 @@ describe('Layer', () => {
     const images: ImageDefinitionWithOptions = ['test', new Image(), {}];
     const children = [{ props: {}, type: 'symbol', key: '1' }];
 
-    mount(
+    render(
       // tslint:disable-next-line:no-any
       <Layer id="1" children={children} map={mockMap as any} images={images} />
     );
@@ -196,10 +199,17 @@ describe('Layer', () => {
 
   it('Should render Polygon for fill', () => {
     const mockMap = getMapMock();
-    const feature = { coordinates: [[[-123, 45], [123, 45]]] };
+    const feature = {
+      coordinates: [
+        [
+          [-123, 45],
+          [123, 45]
+        ]
+      ]
+    };
     const children = [{ props: feature, type: 'symbol', key: '1' }];
 
-    mount(
+    render(
       // tslint:disable-next-line:no-any
       <Layer id="1" type="fill" children={children} map={mockMap as any} />
     );
@@ -220,10 +230,19 @@ describe('Layer', () => {
 
   it('Should render MultiPolygon for fill', () => {
     const mockMap = getMapMock();
-    const feature = { coordinates: [[[[-123, 45], [123, 45]]]] };
+    const feature = {
+      coordinates: [
+        [
+          [
+            [-123, 45],
+            [123, 45]
+          ]
+        ]
+      ]
+    };
     const children = [{ props: feature, type: 'symbol', key: '1' }];
 
-    mount(
+    render(
       // tslint:disable-next-line:no-any
       <Layer id="1" type="fill" children={children} map={mockMap as any} />
     );
@@ -245,15 +264,48 @@ describe('Layer', () => {
   it('Should update minZoom and maxZoom if they change', () => {
     const mockMap = getMapMock();
     const children = [{ props: {}, type: 'symbol', key: '1' }];
-    const wrapper = mount(
+    const { rerender } = render(
       // tslint:disable-next-line:no-any
       <Layer map={mockMap as any} id="zoomer" children={children} />
     );
 
-    wrapper.setProps({ minZoom: 4 });
-    wrapper.setProps({ maxZoom: 10 });
-    wrapper.setProps({ minZoom: undefined, maxZoom: undefined });
-    wrapper.setProps({ maxZoom: 6 });
+    rerender(
+      // tslint:disable-next-line:no-any
+      <Layer map={mockMap as any} id="zoomer" children={children} minZoom={4} />
+    );
+
+    rerender(
+      // tslint:disable-next-line:no-any
+      <Layer
+        map={mockMap as any}
+        id="zoomer"
+        children={children}
+        minZoom={4}
+        maxZoom={10}
+      />
+    );
+
+    rerender(
+      // tslint:disable-next-line:no-any
+      <Layer
+        map={mockMap as any}
+        id="zoomer"
+        children={children}
+        minZoom={undefined}
+        maxZoom={undefined}
+      />
+    );
+
+    rerender(
+      // tslint:disable-next-line:no-any
+      <Layer
+        map={mockMap as any}
+        id="zoomer"
+        children={children}
+        minZoom={undefined}
+        maxZoom={6}
+      />
+    );
 
     expect(mockMap.setLayerZoomRange.mock.calls).toEqual([
       ['zoomer', 4, undefined],
@@ -266,7 +318,7 @@ describe('Layer', () => {
   it('Should start listening onClick mouse event', () => {
     const mockMap = getMapMock();
     const id = 'layer-test';
-    mount(
+    render(
       // tslint:disable-next-line:no-any
       <Layer id={id} map={mockMap as any} onClick={jest.fn()} />
     );

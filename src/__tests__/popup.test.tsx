@@ -10,34 +10,35 @@ jest.mock('../util/overlays', () => ({
 
 import * as React from 'react';
 import Popup, { defaultClassName } from '../popup';
-import { mountWithMap, getMapMock } from '../jest/util';
+import { renderWithMap, getMapMock } from '../jest/util';
 
 describe('Popup', () => {
   it('Should render component', () => {
-    const wrapper = mountWithMap(<Popup coordinates={[0, 0]} />, getMapMock());
-    expect(wrapper).toBeDefined();
+    const { container } = renderWithMap(
+      <Popup coordinates={[0, 0]} />,
+      getMapMock()
+    );
+    expect(container).toBeDefined();
   });
 
   it('Should add custom className', () => {
-    const wrapper = mountWithMap(
+    const { container } = renderWithMap(
       <Popup className="custom-classname" coordinates={[0, 0]} />,
       getMapMock()
     );
 
-    expect(wrapper.find('Popup').hasClass('custom-classname')).toEqual(true);
+    expect(container.querySelectorAll('.custom-classname')).toHaveLength(1);
   });
 
   it('Should concat custom className to defaultClassName', () => {
-    const wrapper = mountWithMap(
+    const { container } = renderWithMap(
       <Popup className="custom-classname" coordinates={[0, 0]} />,
       getMapMock()
     );
 
-    expect(
-      wrapper
-        .find('Popup')
-        .childAt(0)
-        .hasClass(defaultClassName[0])
-    ).toEqual(true);
+    expect(container.querySelectorAll('.custom-classname')[0]).toHaveAttribute(
+      'class',
+      `custom-classname ${defaultClassName[0]} `
+    );
   });
 });

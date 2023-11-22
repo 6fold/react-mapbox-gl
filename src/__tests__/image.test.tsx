@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Image, { Props } from '../image';
 import { getMapMock } from '../jest/util';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import * as MapboxGl from 'mapbox-gl';
 
 describe('Image', () => {
@@ -14,10 +14,10 @@ describe('Image', () => {
     const imageData = {} as Props['data'];
     const imageOptions = {};
 
-    mount(
+    render(
       <Image
         id={imageId}
-        map={(mapMock as unknown) as MapboxGl.Map}
+        map={mapMock as unknown as MapboxGl.Map}
         data={imageData}
         options={imageOptions}
         onError={onError}
@@ -46,10 +46,10 @@ describe('Image', () => {
     const imageData = {} as Props['data'];
     const imageOptions = {};
 
-    const component = mount(
+    const component = render(
       <Image
         id={imageId}
-        map={(mapMock as unknown) as MapboxGl.Map}
+        map={mapMock as unknown as MapboxGl.Map}
         data={imageData}
         options={imageOptions}
         onError={onError}
@@ -76,10 +76,10 @@ describe('Image', () => {
     const imageData = {} as Props['data'];
     const imageOptions = {};
 
-    const component = mount(
+    const component = render(
       <Image
         id={imageId}
-        map={(mapMock as unknown) as MapboxGl.Map}
+        map={mapMock as unknown as MapboxGl.Map}
         data={imageData}
         options={imageOptions}
         onError={onError}
