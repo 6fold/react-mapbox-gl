@@ -7,20 +7,19 @@ import ReactMapboxGl, {
   Feature
 } from '../../../';
 import { AllShapesPolygonCoords, AllShapesMultiPolygonCoords } from './data';
-// tslint:disable-next-line:no-var-requires
+
 const { token } = require('./config.json');
-// tslint:disable-next-line:no-var-requires
+
 const mapData = require('./allShapesStyle.json');
 interface Point {
   lat: number;
   lng: number;
 }
 interface Route {
-  // tslint:disable-next-line:no-any
   [key: string]: any;
   points: Point[];
 }
-// tslint:disable-next-line:no-var-requires
+
 const route: Route = require('./route.json');
 
 const mappedRoute = route.points.map(
@@ -61,7 +60,6 @@ export interface State {
 }
 
 export interface Props {
-  // tslint:disable-next-line:no-any
   onStyleLoad?: (map: any) => any;
 }
 
@@ -119,7 +117,6 @@ class AllShapes extends React.Component<Props, State> {
       <Map
         style={mapData}
         containerStyle={mapStyle}
-        // tslint:disable-next-line:jsx-no-lambda
         onStyleLoad={this.onStyleLoad}
         center={this.state.center}
         zoom={this.state.zoom}

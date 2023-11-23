@@ -14,7 +14,6 @@ export interface StationDict {
 
 const parse = promisify(parseString);
 
-// tslint:disable-next-line:no-any
 const normalize = (station: any) => ({
   id: station.id[0],
   name: station.name[0],

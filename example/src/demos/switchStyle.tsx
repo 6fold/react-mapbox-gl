@@ -3,9 +3,9 @@ import ReactMapboxGl, { Layer, Source, Feature, GeoJSONLayer } from '../../../';
 import { GeoJSONSourceRaw } from 'mapbox-gl';
 
 import styled from 'styled-components';
-// tslint:disable-next-line:no-var-requires
+
 const { token, styles } = require('./config.json');
-// tslint:disable-next-line:no-var-requires
+
 const geojson = require('./geojson.json');
 
 const Map = ReactMapboxGl({ accessToken: token });
@@ -86,7 +86,6 @@ export interface State {
 }
 
 export interface Props {
-  // tslint:disable-next-line:no-any
   onStyleLoad?: (map: any) => any;
 }
 

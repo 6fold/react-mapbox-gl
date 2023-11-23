@@ -39,7 +39,6 @@ export default class Sidebar extends React.Component<Props> {
         {sections.map((section, index) => (
           <Item
             key={index}
-            // tslint:disable-next-line:jsx-no-lambda
             onClick={() => onSelectExample(index)}
             selected={selectedIndex === index}
           >

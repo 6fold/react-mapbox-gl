@@ -5,7 +5,6 @@ import { londonCycleMaxBounds as maxBounds } from './data';
 import { svg } from './cycle';
 import { Station, getCycleStations, StationDict } from './londonCycleData';
 
-// tslint:disable-next-line:no-var-requires
 const { token, styles } = require('./config.json');
 
 const Mapbox = ReactMapboxGl({
@@ -47,7 +46,6 @@ const flyToOptions = {
 };
 
 export interface Props {
-  // tslint:disable-next-line:no-any
   onStyleLoad?: (map: any) => any;
 }
 

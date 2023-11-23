@@ -3,7 +3,6 @@ import ReactMapboxGl, { Layer, Source } from '../../../';
 
 import styled from 'styled-components';
 
-// tslint:disable-next-line:no-var-requires
 const { token, styles } = require('./config.json');
 
 const Map = ReactMapboxGl({ accessToken: token });
@@ -49,7 +48,6 @@ const mapStyle = {
 };
 
 export interface Props {
-  // tslint:disable-next-line:no-any
   onStyleLoad?: (map: any) => any;
 }
 
@@ -72,7 +70,6 @@ export default class VectorLayer extends React.Component<Props> {
     render: 'mapillary'
   };
 
-  // tslint:disable-next-line:no-any
   private onStyleLoad = (map: any) => {
     const { onStyleLoad } = this.props;
     return onStyleLoad && onStyleLoad(map);

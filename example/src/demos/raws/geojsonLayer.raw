@@ -2,9 +2,8 @@ import * as React from 'react';
 import ReactMapboxGl, { GeoJSONLayer } from '../../../';
 import * as MapboxGL from 'mapbox-gl';
 
-// tslint:disable-next-line:no-var-requires
 const { token, styles } = require('./config.json');
-// tslint:disable-next-line:no-var-requires
+
 const geojson = require('./geojson.json');
 
 const Map = ReactMapboxGl({ accessToken: token });
@@ -29,19 +28,16 @@ const circlePaint: MapboxGL.CirclePaint = {
 };
 
 export interface Props {
-  // tslint:disable-next-line:no-any
   onStyleLoad?: (map: any) => any;
 }
 
 class GeoJsonLayer extends React.Component<Props> {
   private center = [-77.01239, 38.91275] as [number, number];
 
-  // tslint:disable-next-line:no-any
   private onClickCircle = (evt: any) => {
     console.log(evt);
   };
 
-  // tslint:disable-next-line:no-any
   private onStyleLoad = (map: any) => {
     const { onStyleLoad } = this.props;
     return onStyleLoad && onStyleLoad(map);
