@@ -1,6 +1,7 @@
 import * as React from 'react';
+
 import GeoJSONLayer from '../geojson-layer';
-import { getMapMock, mountWithMap } from '../jest/util';
+import { getMapMock, renderWithMap } from '../jest/util';
 
 describe('GeoJSONLayer', () => {
   const fillPaint = { 'fill-color': '#001122' };
@@ -20,7 +21,7 @@ describe('GeoJSONLayer', () => {
       />
     );
 
-    mountWithMap(GeoJSONLayerComp, mapMock);
+    renderWithMap(GeoJSONLayerComp, mapMock);
 
     const addFillLayerCall = mapMock.addLayer.mock.calls.find(([call]) =>
       call.id.endsWith('-fill')
@@ -43,7 +44,7 @@ describe('GeoJSONLayer', () => {
     const GeoJSONLayerComp = <GeoJSONLayer fillPaint={fillPaint} data={data} />;
     const mapMock = getMapMock();
 
-    mountWithMap(GeoJSONLayerComp, mapMock);
+    renderWithMap(GeoJSONLayerComp, mapMock);
 
     const addFillLayerCall = mapMock.addLayer.mock.calls.find(([call]) =>
       call.id.endsWith('-fill')
@@ -66,7 +67,7 @@ describe('GeoJSONLayer', () => {
       <GeoJSONLayer fillPaint={fillPaint} data={data} fillOnClick={jest.fn()} />
     );
     const mapMock = getMapMock();
-    mountWithMap(GeoJSONLayerComp, mapMock);
+    renderWithMap(GeoJSONLayerComp, mapMock);
 
     expect(mapMock.on.mock.calls[0][0]).toEqual('click');
     expect(mapMock.on.mock.calls[0][1]).toEqual('geojson-3-fill');

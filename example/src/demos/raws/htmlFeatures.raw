@@ -3,10 +3,8 @@ import ReactMapboxGl, { Marker } from '../../../';
 import styled from 'styled-components';
 import Dropdown from '../dropdown';
 
-// tslint:disable-next-line:no-var-requires
 const { token, styles } = require('./config.json');
 const geocodingUrl = 'https://api.mapbox.com/geocoding/v5';
-// tslint:disable-next-line:max-line-length
 const mapboxGeocoding = (query: string) =>
   `${geocodingUrl}/mapbox.places/${query}.json?access_token=${token}`;
 
@@ -56,7 +54,6 @@ const req = (url: string, body?: any, method = 'GET') =>
   });
 
 export interface Props {
-  // tslint:disable-next-line:no-any
   onStyleLoad?: (map: any) => any;
 }
 

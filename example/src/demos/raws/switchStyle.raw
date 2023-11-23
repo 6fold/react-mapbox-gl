@@ -3,9 +3,9 @@ import ReactMapboxGl, { Layer, Source, Feature, GeoJSONLayer } from '../../../';
 import { GeoJSONSourceRaw } from 'mapbox-gl';
 
 import styled from 'styled-components';
-// tslint:disable-next-line:no-var-requires
+
 const { token, styles } = require('./config.json');
-// tslint:disable-next-line:no-var-requires
+
 const geojson = require('./geojson.json');
 
 const Map = ReactMapboxGl({ accessToken: token });
@@ -74,7 +74,7 @@ const POSITION_CIRCLE_PAINT = {
 };
 
 const selectedStyles = ['basic', 'dark', 'light'];
-const switchStyles = Object.keys(styles).filter(k =>
+const switchStyles = Object.keys(styles).filter((k) =>
   (selectedStyles as any).includes(k)
 );
 
@@ -86,7 +86,6 @@ export interface State {
 }
 
 export interface Props {
-  // tslint:disable-next-line:no-any
   onStyleLoad?: (map: any) => any;
 }
 
@@ -111,7 +110,7 @@ class StyleUpdate extends React.Component<Props, State> {
           mapCenter: [longitude, latitude]
         });
       },
-      err => {
+      (err) => {
         console.error('Cannot retrieve your current position', err);
       }
     );
@@ -180,9 +179,7 @@ class StyleUpdate extends React.Component<Props, State> {
                 sourceId={'example_id'}
               />
             </div>
-          ) : (
-            undefined
-          )}
+          ) : undefined}
 
           <Layer
             type="circle"
@@ -194,7 +191,7 @@ class StyleUpdate extends React.Component<Props, State> {
                 key={index}
                 coordinates={loc}
                 draggable={index === 0}
-                onDragEnd={evt => this.onDragEnd(evt, index)}
+                onDragEnd={(evt) => this.onDragEnd(evt, index)}
                 onDragStart={this.onDragStart}
                 onDrag={this.onDrag}
               />

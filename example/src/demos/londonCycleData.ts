@@ -14,7 +14,6 @@ export interface StationDict {
 
 const parse = promisify(parseString);
 
-// tslint:disable-next-line:no-any
 const normalize = (station: any) => ({
   id: station.id[0],
   name: station.name[0],
@@ -27,9 +26,9 @@ export const getCycleStations = () =>
   fetch(
     'https://tfl.gov.uk/tfl/syndication/feeds/cycle-hire/livecyclehireupdates.xml'
   )
-    .then(res => res.text())
+    .then((res) => res.text())
     .then(parse)
-    .then(res => res.stations.station.map(normalize))
+    .then((res) => res.stations.station.map(normalize))
     .then((stations: Station[]) =>
       stations.reduce((acc: StationDict, station) => {
         acc[station.id] = station;

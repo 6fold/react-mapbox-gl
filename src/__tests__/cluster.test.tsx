@@ -9,9 +9,10 @@ jest.mock('../util/overlays', () => ({
 }));
 
 import * as React from 'react';
+
 import Cluster from '../cluster';
+import { renderWithMap, getMapMock } from '../jest/util';
 import Marker from '../marker';
-import { mountWithMap, getMapMock } from '../jest/util';
 
 const coordinates: Array<[number, number]> = [
   [-12.408741828510017, 58.16339752811908],
@@ -55,7 +56,7 @@ describe('cluster', () => {
     const clusterMarkerFactory = jest.fn();
     let unprojectCalls = 0;
 
-    mountWithMap(
+    renderWithMap(
       <Cluster
         children={coordinates.map((coord, index) => (
           <Marker coordinates={coord} key={index} />

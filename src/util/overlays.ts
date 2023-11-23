@@ -1,5 +1,6 @@
-import { LngLat, Point, Map } from 'mapbox-gl';
 import * as GeoJSON from 'geojson';
+import { LngLat, Point, Map } from 'mapbox-gl';
+
 import { Props } from '../projected-layer';
 import { Anchor, AnchorsOffset } from './types';
 
@@ -57,7 +58,6 @@ const calculateAnchor = (
     anchor = [anchors[1]];
   } else if (
     position.y + offsets.top.y + offsetHeight >
-    // tslint:disable-next-line:no-any
     (map as any).transform.height
   ) {
     anchor = [anchors[2]];
@@ -65,7 +65,6 @@ const calculateAnchor = (
 
   if (position.x < offsetWidth / 2) {
     anchor.push(anchors[3]);
-    // tslint:disable-next-line:no-any
   } else if (position.x > (map as any).transform.width - offsetWidth / 2) {
     anchor.push(anchors[4]);
   }
@@ -102,25 +101,17 @@ const normalizedOffsets = (
 
   if (offset instanceof Point || Array.isArray(offset)) {
     // input specifies a single offset to be applied to all positions
-    return anchors.reduce(
-      (res, anchor) => {
-        res[anchor] = Point.convert(offset);
-        return res;
-      },
-      // tslint:disable-next-line:no-object-literal-type-assertion
-      {} as AnchorsOffset
-    );
+    return anchors.reduce((res, anchor) => {
+      res[anchor] = Point.convert(offset);
+      return res;
+    }, {} as AnchorsOffset);
   }
 
   // input specifies an offset per position
-  return anchors.reduce(
-    (res, anchor) => {
-      res[anchor] = Point.convert(offset[anchor] || defaultPoint);
-      return res;
-    },
-    // tslint:disable-next-line:no-object-literal-type-assertion
-    {} as AnchorsOffset
-  );
+  return anchors.reduce((res, anchor) => {
+    res[anchor] = Point.convert(offset[anchor] || defaultPoint);
+    return res;
+  }, {} as AnchorsOffset);
 };
 
 export const overlayState = (

@@ -36,7 +36,7 @@ const ToggleLive = styled.button`
 export interface State {
   selectedDemoIndex: number;
   showLive: boolean;
-  // tslint:disable-next-line:no-any
+
   map?: any;
 }
 
@@ -70,7 +70,6 @@ class Demos extends React.Component<{}, State> {
     });
   };
 
-  // tslint:disable-next-line:no-any
   private onStyleLoad = (map: any) => {
     this.setState({
       map

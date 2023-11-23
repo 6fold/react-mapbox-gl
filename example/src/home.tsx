@@ -5,7 +5,7 @@ import code from './home-code';
 import ReactMapboxGl, { Layer, Feature } from '../../';
 import { Live } from './live';
 import Logo from './logo';
-// tslint:disable-next-line:no-var-requires
+
 const { token } = require('./demos/config.json');
 
 const Container = styled.div`

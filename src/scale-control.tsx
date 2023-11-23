@@ -1,7 +1,8 @@
-import * as React from 'react';
 import { Map } from 'mapbox-gl';
-import { AnchorLimits } from './util/types';
+import * as React from 'react';
+
 import { withMap } from './context';
+import { AnchorLimits } from './util/types';
 
 const triggerEvents = ['moveend', 'touchend', 'zoomend'];
 
@@ -96,14 +97,14 @@ export class ScaleControl extends React.Component<Props, State> {
   public componentDidMount() {
     this.setScale();
 
-    triggerEvents.forEach(event => {
+    triggerEvents.forEach((event) => {
       this.props.map.on(event, this.setScale);
     });
   }
 
   public componentWillUnmount() {
     if (this.props.map) {
-      triggerEvents.forEach(event => {
+      triggerEvents.forEach((event) => {
         this.props.map.off(event, this.setScale);
       });
     }
@@ -112,9 +113,7 @@ export class ScaleControl extends React.Component<Props, State> {
   private setScale = () => {
     const { measurement, map } = this.props;
 
-    // tslint:disable-next-line:no-any
     const clientWidth = (map as any)._canvas.clientWidth;
-    // tslint:disable-next-line:no-any
     const { _ne, _sw } = map.getBounds() as any;
 
     const totalWidth = this._getDistanceTwoPoints(
@@ -123,7 +122,7 @@ export class ScaleControl extends React.Component<Props, State> {
       measurement
     );
 
-    const relativeWidth = totalWidth / clientWidth * MIN_WIDTH_SCALE;
+    const relativeWidth = (totalWidth / clientWidth) * MIN_WIDTH_SCALE;
 
     const chosenScale = scales.reduce((acc, curr) => {
       if (!acc && curr > relativeWidth) {
@@ -133,8 +132,7 @@ export class ScaleControl extends React.Component<Props, State> {
       return acc;
     }, 0);
 
-    // tslint:disable-next-line:no-any
-    const scaleWidth = chosenScale / totalWidth * clientWidth;
+    const scaleWidth = (chosenScale / totalWidth) * clientWidth;
 
     this.setState({
       chosenScale,

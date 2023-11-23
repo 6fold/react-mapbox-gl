@@ -1,11 +1,13 @@
-import * as React from 'react';
-import ProjectedLayer from './projected-layer';
 import * as GeoJSON from 'geojson';
-import { getClassName } from './util/classname';
 import { Point } from 'mapbox-gl';
+import * as React from 'react';
+
+import ProjectedLayer from './projected-layer';
+import { getClassName } from './util/classname';
 import { Anchor } from './util/types';
 
 export interface Props {
+  children?: React.ReactNode;
   coordinates: GeoJSON.Position;
   anchor?: Anchor;
   offset?: number | [number, number] | Point;

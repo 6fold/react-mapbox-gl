@@ -2,9 +2,11 @@ import * as React from 'react';
 import ReactMapboxGl, { Marker, Cluster, Popup } from '../../../';
 import styled from 'styled-components';
 
-// tslint:disable-next-line:no-var-requires
-const { token, styles: { outdoor } } = require('./config.json');
-// tslint:disable-next-line:no-var-requires
+const {
+  token,
+  styles: { outdoor }
+} = require('./config.json');
+
 const falls = require('./falls.json');
 
 const Map = ReactMapboxGl({ accessToken: token });
@@ -55,7 +57,6 @@ export interface State {
 }
 
 export interface Props {
-  // tslint:disable-next-line:no-any
   onStyleLoad?: (map: any) => any;
 }
 
@@ -107,7 +108,6 @@ class HtmlCluster extends React.Component<Props, State> {
     });
   };
 
-  // tslint:disable-next-line:no-any
   private onStyleLoad = (map: any) => {
     const { onStyleLoad } = this.props;
     return onStyleLoad && onStyleLoad(map);

@@ -1,8 +1,9 @@
-import * as React from 'react';
-import { Props as FeatureProps } from './feature';
-import { generateID } from './util/uid';
-import { LayerCommonProps, LayerEvents, Props as LayerProps } from './layer';
 import { Map } from 'mapbox-gl';
+import * as React from 'react';
+
+import { Props as FeatureProps } from './feature';
+import { LayerCommonProps, LayerEvents, Props as LayerProps } from './layer';
+import { generateID } from './util/uid';
 
 export interface EnhancedLayerProps {
   id?: string;
@@ -41,15 +42,13 @@ export function layerMouseTouchEvents(
       featureIds: number[] = this.hover
     ) =>
       !!featureIds
-        .map(
-          id =>
-            this.getChildFromId(children, id)
-              ? this.getChildFromId(children, id)!.props.draggable
-              : false
+        .map((id) =>
+          this.getChildFromId(children, id)
+            ? this.getChildFromId(children, id)!.props.draggable
+            : false
         )
         .filter(Boolean).length;
 
-    // tslint:disable-next-line:no-any
     public onClick = (evt: any) => {
       const features = evt.features as Array<
         GeoJSON.Feature<GeoJSON.GeometryObject, { id: number }>
@@ -59,7 +58,7 @@ export function layerMouseTouchEvents(
       const { map } = this.props;
 
       if (features) {
-        features.forEach(feature => {
+        features.forEach((feature) => {
           const { id } = feature.properties;
           if (children) {
             const child = this.getChildFromId(children, id);
@@ -73,7 +72,6 @@ export function layerMouseTouchEvents(
       }
     };
 
-    // tslint:disable-next-line:no-any
     public onMouseEnter = (evt: any) => {
       const children = this.getChildren();
 
@@ -98,7 +96,6 @@ export function layerMouseTouchEvents(
       }
     };
 
-    // tslint:disable-next-line:no-any
     public onMouseLeave = (evt: any) => {
       const children = this.getChildren();
       const { map } = this.props;
@@ -106,7 +103,7 @@ export function layerMouseTouchEvents(
         map.dragPan.enable();
       }
 
-      this.hover.forEach(id => {
+      this.hover.forEach((id) => {
         const child = this.getChildFromId(children, id);
         const onMouseLeave = child && child.props.onMouseLeave;
         if (onMouseLeave) {
@@ -126,9 +123,7 @@ export function layerMouseTouchEvents(
       }
     };
 
-    // tslint:disable-next-line:no-any
     public onTouchStart = (evt: any) => {
-      // tslint:disable-next-line:no-any
       this.hover = evt.features.map((feature: any) => feature.properties.id);
 
       if (this.hover.length) {
@@ -144,7 +139,6 @@ export function layerMouseTouchEvents(
       map.once(moveEvent, this.onFeatureDragStart);
       map.on(moveEvent, this.onFeatureDrag);
 
-      // tslint:disable-next-line:no-any
       map.once(endEvent, (evt: any) => {
         map.off(moveEvent, this.onFeatureDragStart);
         map.off(moveEvent, this.onFeatureDrag);
@@ -152,12 +146,11 @@ export function layerMouseTouchEvents(
       });
     };
 
-    // tslint:disable-next-line:no-any
     public onFeatureDragStart = (evt: any) => {
       const { map } = this.props;
       const children = this.getChildren();
 
-      this.hover.forEach(id => {
+      this.hover.forEach((id) => {
         const child = this.getChildFromId(children, id);
         if (child && !child.props.draggable) {
           return;
@@ -170,14 +163,15 @@ export function layerMouseTouchEvents(
       });
     };
 
-    // tslint:disable-next-line:no-any
     public onFeatureDrag = (evt: any) => {
       const children = this.getChildren();
       const { map } = this.props;
-      const { lngLat: { lng, lat } } = evt;
+      const {
+        lngLat: { lng, lat }
+      } = evt;
       this.draggedChildren = [];
 
-      this.hover.forEach(id => {
+      this.hover.forEach((id) => {
         const child = this.getChildFromId(children, id);
         const onDrag = child && child.props.onDrag;
 
@@ -198,12 +192,11 @@ export function layerMouseTouchEvents(
       this.forceUpdate();
     };
 
-    // tslint:disable-next-line:no-any
     public onFeatureDragEnd = (evt: any) => {
       const { map } = this.props;
       const children = this.getChildren();
 
-      this.hover.forEach(id => {
+      this.hover.forEach((id) => {
         const child = this.getChildFromId(children, id);
         const onDragEnd = child && child.props.onDragEnd;
 

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import ReactMapboxGl, { Layer } from '../../../';
 
-// tslint:disable-next-line:no-var-requires
 const { token, styles } = require('./config.json');
 
 const Map = ReactMapboxGl({ accessToken: token });
@@ -24,7 +23,6 @@ const paintLayer = {
 };
 
 export interface Props {
-  // tslint:disable-next-line:no-any
   onStyleLoad?: (map: any) => any;
 }
 
@@ -34,7 +32,6 @@ class ThreeDMap extends React.Component<Props> {
   private pitch: [number] = [60];
   private center = [-0.0824952, 51.5144951] as [number, number];
 
-  // tslint:disable-next-line:no-any
   private onStyleLoad = (map: any) => {
     const { onStyleLoad } = this.props;
     return onStyleLoad && onStyleLoad(map);

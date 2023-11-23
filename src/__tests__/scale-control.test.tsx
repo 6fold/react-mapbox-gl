@@ -1,10 +1,11 @@
 import * as React from 'react';
+
+import { renderWithMap, getMapMock } from '../jest/util';
 import ScaleControl from '../scale-control';
-import { mountWithMap, getMapMock } from '../jest/util';
 
 describe('ScaleControl', () => {
   it.skip('should render the component', () => {
-    const wrapper = mountWithMap(
+    renderWithMap(
       <ScaleControl />,
       getMapMock({
         _canvas: {
@@ -16,7 +17,5 @@ describe('ScaleControl', () => {
         })
       })
     );
-
-    expect(wrapper).toBeDefined();
   });
 });

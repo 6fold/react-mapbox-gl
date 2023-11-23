@@ -19,14 +19,12 @@ interface ItemProps {
 
 const Item =
   // eslint-disable-next-line
-  styled.li <
-  ItemProps >
-  `
-  margin: 0px 10px;
-  padding: 20px 0px;
-  font-weight: ${({ selected }) => (selected ? 700 : 100)};
-  cursor: pointer;
-`;
+  styled.li<ItemProps>`
+    margin: 0px 10px;
+    padding: 20px 0px;
+    font-weight: ${({ selected }) => (selected ? 700 : 100)};
+    cursor: pointer;
+  `;
 
 export interface Props {
   onSelectExample: (index: number) => void;
@@ -41,7 +39,6 @@ export default class Sidebar extends React.Component<Props> {
         {sections.map((section, index) => (
           <Item
             key={index}
-            // tslint:disable-next-line:jsx-no-lambda
             onClick={() => onSelectExample(index)}
             selected={selectedIndex === index}
           >

@@ -1,9 +1,9 @@
-import { mount } from 'enzyme';
-import * as React from 'react';
-import { MapContext } from '../context';
+import { render } from '@testing-library/react';
 import * as MapboxGl from 'mapbox-gl';
+import * as React from 'react';
 
-// tslint:disable-next-line:no-any
+import { MapContext } from '../context';
+
 export const getMapMock = (override?: { [key: string]: any }) => ({
   addSource: jest.fn(),
   removeSource: jest.fn(),
@@ -16,14 +16,14 @@ export const getMapMock = (override?: { [key: string]: any }) => ({
   loadImage: jest.fn(),
   removeImage: jest.fn(),
   hasImage: jest.fn(),
+  getStyle: jest.fn(),
   getSource: jest.fn().mockReturnValue({ setData: jest.fn() }),
   project: jest.fn(),
   ...override
 });
 
-// tslint:disable-next-line:no-any
-export const mountWithMap = (comp: JSX.Element, mapValue: any) => {
-  return mount(
+export const renderWithMap = (comp: JSX.Element, mapValue: any) => {
+  return render(
     <MapContext.Provider value={mapValue}>{comp}</MapContext.Provider>
   );
 };

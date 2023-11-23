@@ -1,11 +1,12 @@
-import * as React from 'react';
-import { LngLatBounds, Map } from 'mapbox-gl';
-import { Props as MarkerProps } from './marker';
-import Supercluster from 'supercluster';
-import * as GeoJSON from 'geojson';
 import bbox from '@turf/bbox';
 import { polygon, featureCollection } from '@turf/helpers';
+import * as GeoJSON from 'geojson';
+import { LngLatBounds, Map } from 'mapbox-gl';
+import * as React from 'react';
+import Supercluster from 'supercluster';
+
 import { withMap } from './context';
+import { Props as MarkerProps } from './marker';
 
 export interface Props {
   ClusterMarkerFactory(
@@ -128,9 +129,9 @@ export class Cluster extends React.Component<Props, State> {
 
   private feature(coordinates: GeoJSON.Position) {
     return {
-      type: 'Feature' as 'Feature',
+      type: 'Feature' as const,
       geometry: {
-        type: 'Point' as 'Point',
+        type: 'Point' as const,
         coordinates
       },
       properties: {}
@@ -140,7 +141,7 @@ export class Cluster extends React.Component<Props, State> {
   private childrenToFeatures = (
     children: Array<React.ReactElement<MarkerProps>>
   ) =>
-    children.map(child => {
+    children.map((child) => {
       const feature = this.feature(child && child.props.coordinates);
       this.featureClusterMap.set(feature, child);
       return feature;
@@ -178,7 +179,6 @@ export class Cluster extends React.Component<Props, State> {
     );
     const childrenBbox = bbox(featureCollection(children));
     // https://github.com/mapbox/mapbox-gl-js/issues/5249
-    // tslint:disable-next-line:no-any
     this.props.map.fitBounds(LngLatBounds.convert(childrenBbox as any), {
       padding: this.props.zoomOnClickPadding!
     });

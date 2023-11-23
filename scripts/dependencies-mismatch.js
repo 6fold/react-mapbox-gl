@@ -1,5 +1,5 @@
-const mainPackage = require('../package.json');
 const exPackage = require('../example/package.json');
+const mainPackage = require('../package.json');
 
 const allMainDeps = {
   ...mainPackage.dependencies,
@@ -13,8 +13,8 @@ const allExDeps = {
   ...exPackage.devDependencies
 };
 
-const res = Object.keys(allMainDeps).filter(
-  k => (allExDeps[k] ? allMainDeps[k] !== allExDeps[k] : false)
+const res = Object.keys(allMainDeps).filter((k) =>
+  allExDeps[k] ? allMainDeps[k] !== allExDeps[k] : false
 );
 
 if (res.length > 0) {
