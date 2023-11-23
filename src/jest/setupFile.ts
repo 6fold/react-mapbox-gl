@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 // https://stackoverflow.com/a/43950142/583830
 
 // global.window = global;
-window.addEventListener = () => {}; // tslint:disable-line
+window.addEventListener = () => {};
 window.requestAnimationFrame = () => {
   throw new Error('requestAnimationFrame is not supported in Node');
 };

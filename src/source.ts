@@ -1,7 +1,8 @@
-import * as React from 'react';
 import { Map, GeoJSONSource, GeoJSONSourceRaw, Layer } from 'mapbox-gl';
-import { TilesJson } from './util/types';
+import * as React from 'react';
+
 import { withMap } from './context';
+import { TilesJson } from './util/types';
 
 export interface Props {
   id: string;

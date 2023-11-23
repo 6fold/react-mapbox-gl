@@ -1,7 +1,8 @@
-import * as React from 'react';
 import { Map } from 'mapbox-gl';
-import { AnchorLimits } from './util/types';
+import * as React from 'react';
+
 import { withMap } from './context';
+import { AnchorLimits } from './util/types';
 
 const triggerEvents = ['moveend', 'touchend', 'zoomend'];
 
@@ -112,9 +113,7 @@ export class ScaleControl extends React.Component<Props, State> {
   private setScale = () => {
     const { measurement, map } = this.props;
 
-    // tslint:disable-next-line:no-any
     const clientWidth = (map as any)._canvas.clientWidth;
-    // tslint:disable-next-line:no-any
     const { _ne, _sw } = map.getBounds() as any;
 
     const totalWidth = this._getDistanceTwoPoints(
@@ -133,7 +132,6 @@ export class ScaleControl extends React.Component<Props, State> {
       return acc;
     }, 0);
 
-    // tslint:disable-next-line:no-any
     const scaleWidth = (chosenScale / totalWidth) * clientWidth;
 
     this.setState({

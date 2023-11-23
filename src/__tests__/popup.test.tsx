@@ -9,8 +9,9 @@ jest.mock('../util/overlays', () => ({
 }));
 
 import * as React from 'react';
-import Popup, { defaultClassName } from '../popup';
+
 import { renderWithMap, getMapMock } from '../jest/util';
+import Popup, { defaultClassName } from '../popup';
 
 describe('Popup', () => {
   it('Should render component', () => {

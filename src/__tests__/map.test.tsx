@@ -2,10 +2,11 @@ jest.mock('mapbox-gl', () => ({
   Map: jest.fn()
 }));
 
-import * as React from 'react';
-import ReactMapboxGl, { FitBounds } from '../map';
 import { render } from '@testing-library/react';
+import * as React from 'react';
+
 import { getMapMock } from '../jest/util';
+import ReactMapboxGl, { FitBounds } from '../map';
 
 let mockfitBounds = jest.fn();
 let mockon = jest.fn();
@@ -23,7 +24,6 @@ const getMock = (override = {}) =>
     ...override
   });
 describe('Map', () => {
-  // tslint:disable-next-line:no-any
   beforeEach(() => {
     mockfitBounds = jest.fn();
     mockon = jest.fn();
@@ -56,9 +56,13 @@ describe('Map', () => {
       />
     );
 
-    expect(mockfitBounds).toBeCalledWith(fitBoundsValues, fitBoundsOptions, {
-      fitboundUpdate: true
-    });
+    expect(mockfitBounds).toHaveBeenCalledWith(
+      fitBoundsValues,
+      fitBoundsOptions,
+      {
+        fitboundUpdate: true
+      }
+    );
   });
 
   it('Should update fitBounds if fitBoundsOptions changes', () => {
@@ -107,7 +111,6 @@ describe('Map', () => {
 
     render(<MapboxMap style="" fitBounds={fitBoundsValues} />);
 
-    // tslint:disable-next-line:no-any
     const lastCall: any = mockMap.mock.calls[mockMap.mock.calls.length - 1];
     expect(lastCall[0].center).toEqual([1, 6]);
   });
@@ -120,7 +123,7 @@ describe('Map', () => {
 
     render(<MapboxMap style="" onStyleLoad={jest.fn()} />);
 
-    expect(mockon).toBeCalledWith('load', expect.any(Function));
+    expect(mockon).toHaveBeenCalledWith('load', expect.any(Function));
   });
 
   it('Should update the map center position', () => {
@@ -160,7 +163,7 @@ describe('Map', () => {
 
     rerender(<MapboxMap style="" maxBounds={maxBoundsProps} />);
 
-    expect(mockMaxBounds).toBeCalledWith(maxBoundsProps);
+    expect(mockMaxBounds).toHaveBeenCalledWith(maxBoundsProps);
   });
 
   // Handling zoom prop

@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import GeoJSONLayer from '../geojson-layer';
 import { getMapMock, renderWithMap } from '../jest/util';
 

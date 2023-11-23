@@ -1,8 +1,9 @@
-import * as React from 'react';
 import { Map, Point } from 'mapbox-gl';
+import * as React from 'react';
+
+import { withMap } from './context';
 import { OverlayParams, overlayState, overlayTransform } from './util/overlays';
 import { Anchor } from './util/types';
-import { withMap } from './context';
 
 const defaultStyle = {
   zIndex: 3
@@ -32,7 +33,6 @@ export class ProjectedLayer extends React.Component<Props, OverlayParams> {
 
   public static defaultProps = {
     offset: 0,
-    // tslint:disable-next-line:no-any
     onClick: (...args: any[]) => args
   };
 

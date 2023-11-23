@@ -1,6 +1,7 @@
 import * as React from 'react';
-import ScaleControl from '../scale-control';
+
 import { renderWithMap, getMapMock } from '../jest/util';
+import ScaleControl from '../scale-control';
 
 describe('ScaleControl', () => {
   it.skip('should render the component', () => {

@@ -1,9 +1,10 @@
-import * as React from 'react';
 import * as MapboxGL from 'mapbox-gl';
-const isEqual = require('deep-equal'); //tslint:disable-line
-import diff from './util/diff';
-import { Props as FeatureProps } from './feature';
+import * as React from 'react';
 
+import { Props as FeatureProps } from './feature';
+import diff from './util/diff';
+
+const isEqual = require('deep-equal');
 export type Paint = MapboxGL.AnyPaint;
 
 export type Layout = MapboxGL.AnyLayout;
@@ -20,7 +21,6 @@ export type ImageDefinitionWithOptions = [
   ImageOptions
 ];
 
-// tslint:disable-next-line:no-any
 export type MouseEvent = (evt: any) => any;
 
 export interface LayerEvents {
@@ -54,13 +54,11 @@ export interface LayerCommonProps {
   before?: string;
   paint?: Paint;
   layout?: Layout;
-  // tslint:disable-next-line:no-any
   metadata?: any;
   sourceLayer?: string;
   minZoom?: number;
   maxZoom?: number;
   geoJSONSourceOptions?: MapboxGL.GeoJSONSourceOptions;
-  // tslint:disable-next-line:no-any
   filter?: any[];
   children?: JSX.Element | JSX.Element[];
 }
@@ -91,7 +89,7 @@ const eventToHandler: EventToHandlersType = {
 
 export default class Layer extends React.Component<Props> {
   public static defaultProps = {
-    type: 'symbol' as 'symbol',
+    type: 'symbol' as const,
     layout: {},
     paint: {}
   };
@@ -105,7 +103,6 @@ export default class Layer extends React.Component<Props> {
     }
   };
 
-  // tslint:disable-next-line:no-any
   private geometry = (coordinates: any): GeoJSON.Geometry => {
     switch (this.props.type) {
       case 'symbol':
@@ -171,11 +168,9 @@ export default class Layer extends React.Component<Props> {
       id,
       source: sourceId || id,
       // TODO: Fix mapbox-gl types
-      // tslint:disable-next-line:no-any
       type: type as any,
       layout,
       // TODO: Fix mapbox-gl types
-      // tslint:disable-next-line:no-any
       paint: paint as any,
       metadata
     };

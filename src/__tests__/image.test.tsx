@@ -1,8 +1,9 @@
-import * as React from 'react';
-import Image, { Props } from '../image';
-import { getMapMock } from '../jest/util';
 import { render } from '@testing-library/react';
 import * as MapboxGl from 'mapbox-gl';
+import * as React from 'react';
+
+import Image, { Props } from '../image';
+import { getMapMock } from '../jest/util';
 
 describe('Image', () => {
   it('Should add image on mount', () => {
@@ -31,8 +32,8 @@ describe('Image', () => {
       imageOptions
     ]);
 
-    expect(onLoaded).toBeCalled();
-    expect(onError).not.toBeCalled();
+    expect(onLoaded).toHaveBeenCalled();
+    expect(onError).not.toHaveBeenCalled();
   });
 
   it('Should remove image on unmount', () => {
@@ -57,11 +58,11 @@ describe('Image', () => {
       />
     );
 
-    expect(mapMock.addImage).toBeCalled();
-    expect(onLoaded).toBeCalled();
+    expect(mapMock.addImage).toHaveBeenCalled();
+    expect(onLoaded).toHaveBeenCalled();
 
     component.unmount();
-    expect(mapMock.removeImage).toBeCalled();
+    expect(mapMock.removeImage).toHaveBeenCalled();
   });
 
   it('Should not call removeImage when map styles are undefined', () => {
@@ -87,9 +88,9 @@ describe('Image', () => {
       />
     );
 
-    expect(onLoaded).toBeCalled();
+    expect(onLoaded).toHaveBeenCalled();
 
     component.unmount();
-    expect(mapMock.removeImage).not.toBeCalled();
+    expect(mapMock.removeImage).not.toHaveBeenCalled();
   });
 });

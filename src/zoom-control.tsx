@@ -1,7 +1,8 @@
-import * as React from 'react';
 import { Map } from 'mapbox-gl';
-import { AnchorLimits } from './util/types';
+import * as React from 'react';
+
 import { withMap } from './context';
+import { AnchorLimits } from './util/types';
 
 const containerStyle: React.CSSProperties = {
   position: 'absolute',
@@ -27,7 +28,8 @@ const buttonStyle = {
   border: 0,
   height: 26,
   width: 26,
-  backgroundImage: `url('https://api.mapbox.com/mapbox.js/v2.4.0/images/icons-000000@2x.png')`,
+  backgroundImage:
+    "url('https://api.mapbox.com/mapbox.js/v2.4.0/images/icons-000000@2x.png')",
   backgroundPosition: '0px 0px',
   backgroundSize: '26px 260px',
   outline: 0

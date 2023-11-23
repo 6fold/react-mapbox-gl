@@ -1,7 +1,8 @@
 import * as React from 'react';
-import layerMouseTouchEvents from '../layer-events-hoc';
-import { MockComponent, renderWithMap, getMapMock } from '../jest/util';
+
 import { withMap } from '../context';
+import { MockComponent, renderWithMap, getMapMock } from '../jest/util';
+import layerMouseTouchEvents from '../layer-events-hoc';
 
 const LayerHOC = withMap(layerMouseTouchEvents(MockComponent));
 

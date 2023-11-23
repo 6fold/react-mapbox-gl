@@ -1,5 +1,8 @@
 import * as MapboxGl from 'mapbox-gl';
 import * as React from 'react';
+import { createPortal } from 'react-dom';
+
+import { MapContext } from './context';
 import {
   Events,
   listenEvents,
@@ -7,10 +10,8 @@ import {
   Listeners,
   updateEvents
 } from './map-events';
-import { MapContext } from './context';
-import { createPortal } from 'react-dom';
-const isEqual = require('deep-equal'); //tslint:disable-line
 
+const isEqual = require('deep-equal');
 export interface PaddingOptions {
   top: number;
   bottom: number;
@@ -67,11 +68,7 @@ export interface State {
   ready: boolean;
 }
 
-export type RequestTransformFunction = (
-  url: string,
-  resourceType: any // tslint:disable-line:no-any
-) => any; // tslint:disable-line:no-any
-
+export type RequestTransformFunction = (url: string, resourceType: any) => any;
 // Static Properties of the map
 export interface FactoryParameters {
   accessToken: string;
@@ -107,7 +104,6 @@ const defaultZoom = [11];
 const defaultMovingMethod = 'flyTo';
 const defaultCenter = [-0.2416815, 51.5285582];
 
-// tslint:disable-next-line:no-namespace
 declare global {
   namespace mapboxgl {
     export interface MapboxOptions {
@@ -147,7 +143,6 @@ const ReactMapboxFactory = ({
 }: FactoryParameters) => {
   return class ReactMapboxGl extends React.Component<Props & Events, State> {
     public static defaultProps = {
-      // tslint:disable-next-line:no-any
       onStyleLoad: (map: MapboxGl.Map, evt: any) => null,
       center: defaultCenter,
       zoom: defaultZoom,
@@ -166,7 +161,6 @@ const ReactMapboxFactory = ({
 
     public listeners: Listeners = {};
 
-    // tslint:disable-next-line:variable-name
     public _isMounted = true;
 
     public container?: HTMLElement;
@@ -189,10 +183,8 @@ const ReactMapboxFactory = ({
         maxBounds
       } = this.props;
 
-      // tslint:disable-next-line:no-any
       (MapboxGl as any).accessToken = accessToken;
       if (apiUrl) {
-        // tslint:disable-next-line:no-any
         (MapboxGl as any).config.API_URL = apiUrl;
       }
 
@@ -270,7 +262,6 @@ const ReactMapboxFactory = ({
         map.fitBounds(fitBounds, fitBoundsOptions, { fitboundUpdate: true });
       }
 
-      // tslint:disable-next-line:no-any
       map.on('load', (evt: React.SyntheticEvent<any>) => {
         if (this._isMounted) {
           this.setState({ ready: true });

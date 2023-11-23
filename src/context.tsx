@@ -1,5 +1,5 @@
-import * as React from 'react';
 import * as MapboxGl from 'mapbox-gl';
+import * as React from 'react';
 
 export const MapContext = React.createContext<MapboxGl.Map | undefined>(
   undefined
@@ -15,7 +15,7 @@ export function withMap<T extends { map: MapboxGl.Map | undefined }>(
       <MapContext.Consumer>
         {(map) => (
           <Component
-            // @ts-expect-error
+            // @ts-expect-error hack around TS not understanding that map is defined
             map={map}
             {...(props as T)}
           />

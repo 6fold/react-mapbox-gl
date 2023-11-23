@@ -1,6 +1,7 @@
 import * as React from 'react';
-import RotationControl from '../rotation-control';
+
 import { renderWithMap, getMapMock } from '../jest/util';
+import RotationControl from '../rotation-control';
 
 describe('RotationControl', () => {
   it('should render the component', () => {

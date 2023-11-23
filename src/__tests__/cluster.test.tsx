@@ -9,9 +9,10 @@ jest.mock('../util/overlays', () => ({
 }));
 
 import * as React from 'react';
+
 import Cluster from '../cluster';
-import Marker from '../marker';
 import { renderWithMap, getMapMock } from '../jest/util';
+import Marker from '../marker';
 
 const coordinates: Array<[number, number]> = [
   [-12.408741828510017, 58.16339752811908],

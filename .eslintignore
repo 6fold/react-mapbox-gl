@@ -1,0 +1,6 @@
+lib
+lib-esm
+node_modules
+build
+scripts
+example

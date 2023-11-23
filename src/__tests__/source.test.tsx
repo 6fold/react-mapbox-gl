@@ -1,7 +1,8 @@
-import * as React from 'react';
-import Source from '../source';
-import { renderWithMap, getMapMock } from '../jest/util';
 import { GeoJSONSourceRaw } from 'mapbox-gl';
+import * as React from 'react';
+
+import { renderWithMap, getMapMock } from '../jest/util';
+import Source from '../source';
 
 describe('Source', () => {
   const EMPTY_GEOJSON_SRC: GeoJSONSourceRaw = {

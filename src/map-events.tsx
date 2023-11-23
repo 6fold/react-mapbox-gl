@@ -2,7 +2,6 @@ import * as MapboxGl from 'mapbox-gl';
 
 export type MapEvent = (
   map: MapboxGl.Map,
-  // tslint:disable-next-line:no-any
   evt: React.SyntheticEvent<any>
 ) => void;
 
@@ -100,7 +99,7 @@ export const events: EventMapping = {
 };
 
 export type Listeners = {
-  [T in keyof Events]: (evt: React.SyntheticEvent<any>) => void; // tslint:disable-line:no-any
+  [T in keyof Events]: (evt: React.SyntheticEvent<any>) => void;
 };
 
 export const listenEvents = (
@@ -108,26 +107,21 @@ export const listenEvents = (
   props: Partial<Events>,
   map: MapboxGl.Map
 ) =>
-  Object.keys(partialEvents).reduce(
-    (listeners, event) => {
-      const propEvent = props[event];
+  Object.keys(partialEvents).reduce((listeners, event) => {
+    const propEvent = props[event];
 
-      if (propEvent) {
-        // tslint:disable-next-line:no-any
-        const listener = (evt: React.SyntheticEvent<any>) => {
-          propEvent(map, evt);
-        };
+    if (propEvent) {
+      const listener = (evt: React.SyntheticEvent<any>) => {
+        propEvent(map, evt);
+      };
 
-        map.on(partialEvents[event], listener);
+      map.on(partialEvents[event], listener);
 
-        listeners[event] = listener;
-      }
+      listeners[event] = listener;
+    }
 
-      return listeners;
-    },
-    // tslint:disable-next-line:no-object-literal-type-assertion
-    {} as Listeners
-  );
+    return listeners;
+  }, {} as Listeners);
 
 export const updateEvents = (
   listeners: Listeners,

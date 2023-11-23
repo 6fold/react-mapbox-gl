@@ -1,7 +1,8 @@
-import * as React from 'react';
 import userEvent from '@testing-library/user-event';
-import ZoomControl from '../zoom-control';
+import * as React from 'react';
+
 import { renderWithMap, getMapMock } from '../jest/util';
+import ZoomControl from '../zoom-control';
 
 describe('ZoomControl', () => {
   const zoomIn = '#zoomIn';

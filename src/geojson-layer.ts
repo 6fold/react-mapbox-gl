@@ -1,10 +1,12 @@
-import * as React from 'react';
 import * as MapboxGL from 'mapbox-gl';
-const isEqual = require('deep-equal'); //tslint:disable-line
-import diff from './util/diff';
-import { generateID } from './util/uid';
-import { Sources, LayerType } from './util/types';
+import * as React from 'react';
+
 import { withMap } from './context';
+import diff from './util/diff';
+import { Sources, LayerType } from './util/types';
+import { generateID } from './util/uid';
+
+const isEqual = require('deep-equal');
 
 const types = ['symbol', 'line', 'fill', 'fill-extrusion', 'circle'];
 const toCamelCase = (str: string) =>
@@ -23,7 +25,6 @@ const eventToHandler = {
   click: 'OnClick'
 };
 
-// tslint:disable-next-line:no-any
 export type MouseEvent = (evt: any) => any;
 
 export interface LineProps {
@@ -123,7 +124,6 @@ export class GeoJSONLayer extends React.Component<Props> {
     type: 'geojson',
     ...this.props.sourceOptions,
     data: this.props.data
-    // tslint:disable-next-line:no-any
   } as any;
 
   private layerIds: string[] = [];
@@ -150,10 +150,8 @@ export class GeoJSONLayer extends React.Component<Props> {
       id: layerId,
       source: this.id,
       // TODO: Fix mapbox-gl types
-      // tslint:disable-next-line:no-any
       type: type as any,
       // TODO: Fix mapbox-gl types
-      // tslint:disable-next-line:no-any
       paint: paint as any,
       layout,
       ...layerOptions
@@ -274,7 +272,6 @@ export class GeoJSONLayer extends React.Component<Props> {
         type: 'geojson',
         ...this.props.sourceOptions,
         data: this.props.data
-        // tslint:disable-next-line:no-any
       } as any;
     }
 
@@ -290,7 +287,7 @@ export class GeoJSONLayer extends React.Component<Props> {
         map.setFilter(layerId, this.props.layerOptions.filter || []);
       }
 
-      const paintProp = toCamelCase(type) + 'Paint';
+      const paintProp = `${toCamelCase(type)}Paint`;
 
       if (!isEqual(prevProps[paintProp], this.props[paintProp])) {
         const paintDiff = diff(prevProps[paintProp], this.props[paintProp]);
@@ -300,7 +297,7 @@ export class GeoJSONLayer extends React.Component<Props> {
         });
       }
 
-      const layoutProp = toCamelCase(type) + 'Layout';
+      const layoutProp = `${toCamelCase(type)}Layout`;
 
       if (!isEqual(prevProps[layoutProp], this.props[layoutProp])) {
         const layoutDiff = diff(prevProps[layoutProp], this.props[layoutProp]);
