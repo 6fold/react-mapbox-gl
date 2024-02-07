@@ -2,13 +2,13 @@ module.exports = {
   env: {
     node: true,
     browser: true,
-    es6: true
+    es6: true,
   },
   plugins: ['@sixfold'],
   extends: [
     'plugin:@sixfold/base',
     'plugin:@sixfold/react',
-    'plugin:@sixfold/jest'
+    'plugin:@sixfold/jest',
   ],
   rules: {
     // rules turned off during the migration, can be fixed and enabled later
@@ -23,6 +23,6 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     'no-underscore-dangle': 'off',
-    'array-callback-return': 'off'
-  }
+    'array-callback-return': 'off',
+  },
 };
