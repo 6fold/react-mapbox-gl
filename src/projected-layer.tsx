@@ -6,7 +6,7 @@ import { OverlayParams, overlayState, overlayTransform } from './util/overlays';
 import { Anchor } from './util/types';
 
 const defaultStyle = {
-  zIndex: 3
+  zIndex: 3,
 };
 
 export interface Props {
@@ -33,7 +33,7 @@ export class ProjectedLayer extends React.Component<Props, OverlayParams> {
 
   public static defaultProps = {
     offset: 0,
-    onClick: (...args: any[]) => args
+    onClick: (...args: any[]) => args,
   };
 
   public state: OverlayParams = {};
@@ -94,13 +94,13 @@ export class ProjectedLayer extends React.Component<Props, OverlayParams> {
       onScroll,
       onWheel,
       type,
-      tabIndex
+      tabIndex,
     } = this.props;
     const { anchor } = this.state;
     const finalStyle = {
       ...defaultStyle,
       ...style,
-      transform: overlayTransform(this.state).join(' ')
+      transform: overlayTransform(this.state).join(' '),
     };
     const anchorClassname =
       anchor && type === 'popup' ? `mapboxgl-popup-anchor-${anchor}` : '';

@@ -47,7 +47,7 @@ const BottomBar = styled.div`
 
 const mapStyle = {
   height: '100%',
-  width: '100%'
+  width: '100%',
 };
 
 const GEOJSON_SOURCE_OPTIONS: GeoJSONSourceRaw = {
@@ -56,13 +56,13 @@ const GEOJSON_SOURCE_OPTIONS: GeoJSONSourceRaw = {
     type: 'Feature',
     geometry: {
       type: 'Point',
-      coordinates: [-77.0323, 38.9131]
+      coordinates: [-77.0323, 38.9131],
     },
     properties: {
       title: 'Mapbox DC',
-      'marker-symbol': 'monument'
-    }
-  }
+      'marker-symbol': 'monument',
+    },
+  },
 };
 
 const POSITION_CIRCLE_PAINT = {
@@ -70,12 +70,12 @@ const POSITION_CIRCLE_PAINT = {
   'circle-radius': 10,
   'circle-blur': 0.15,
   'circle-color': '#3770C6',
-  'circle-stroke-color': 'white'
+  'circle-stroke-color': 'white',
 };
 
 const selectedStyles = ['basic', 'dark', 'light'];
 const switchStyles = Object.keys(styles).filter((k) =>
-  (selectedStyles as any).includes(k)
+  (selectedStyles as any).includes(k),
 );
 
 export interface State {
@@ -97,7 +97,7 @@ class StyleUpdate extends React.Component<Props, State> {
     featuresPostion: [InitialUserPostion, InitialUserPostion],
     // userPosition: InitialUserPostion,
     mapCenter: InitialUserPostion,
-    renderLayer: true
+    renderLayer: true,
   };
 
   public UNSAFE_componentWillMount() {
@@ -107,12 +107,12 @@ class StyleUpdate extends React.Component<Props, State> {
 
         this.setState({
           featuresPostion: [[longitude, latitude], InitialUserPostion],
-          mapCenter: [longitude, latitude]
+          mapCenter: [longitude, latitude],
         });
       },
       (err) => {
         console.error('Cannot retrieve your current position', err);
-      }
+      },
     );
   }
 
@@ -123,7 +123,7 @@ class StyleUpdate extends React.Component<Props, State> {
       currentIndex === switchStyles.length - 1 ? 0 : currentIndex + 1;
 
     this.setState({
-      styleKey: switchStyles[nextIndex]
+      styleKey: switchStyles[nextIndex],
     });
   };
 
@@ -149,7 +149,7 @@ class StyleUpdate extends React.Component<Props, State> {
           return [lngLat.lng, lngLat.lat];
         }
         return el;
-      })
+      }),
     });
   };
 
@@ -205,7 +205,7 @@ class StyleUpdate extends React.Component<Props, State> {
               'text-field': '{place}',
               'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
               'text-offset': [0, 0.6],
-              'text-anchor': 'top'
+              'text-anchor': 'top',
             }}
           />
         </Map>

@@ -24,7 +24,7 @@ export const anchors = [
   'top-left',
   'top-right',
   'bottom-left',
-  'bottom-right'
+  'bottom-right',
 ] as Anchor[];
 
 export const anchorTranslates = {
@@ -36,7 +36,7 @@ export const anchorTranslates = {
   'top-left': 'translate(0, 0)',
   'top-right': 'translate(-100%, 0)',
   'bottom-left': 'translate(0, -100%)',
-  'bottom-right': 'translate(-100%, -100%)'
+  'bottom-right': 'translate(-100%, -100%)',
 };
 
 // Hack /o\
@@ -50,7 +50,7 @@ const calculateAnchor = (
   map: Map,
   offsets: AnchorsOffset,
   position: PointDef,
-  { offsetHeight, offsetWidth } = defaultElement
+  { offsetHeight, offsetWidth } = defaultElement,
 ) => {
   let anchor: string[] = [];
 
@@ -77,7 +77,7 @@ const calculateAnchor = (
 };
 
 const normalizedOffsets = (
-  offset?: number | Point | AnchorsOffset | [number, number]
+  offset?: number | Point | AnchorsOffset | [number, number],
 ): AnchorsOffset => {
   if (!offset) {
     return normalizedOffsets(new Point(0, 0));
@@ -95,7 +95,7 @@ const normalizedOffsets = (
       'top-left': new Point(cornerOffset, cornerOffset),
       'top-right': new Point(-cornerOffset, cornerOffset),
       'bottom-left': new Point(cornerOffset, -cornerOffset),
-      'bottom-right': new Point(-cornerOffset, -cornerOffset)
+      'bottom-right': new Point(-cornerOffset, -cornerOffset),
     };
   }
 
@@ -117,7 +117,7 @@ const normalizedOffsets = (
 export const overlayState = (
   props: Props,
   map: Map,
-  container: HTMLElement
+  container: HTMLElement,
 ) => {
   const position = projectCoordinates(map, props.coordinates);
   const offsets = normalizedOffsets(props.offset);
@@ -127,7 +127,7 @@ export const overlayState = (
   return {
     anchor,
     position,
-    offset: offsets[anchor]
+    offset: offsets[anchor],
   };
 };
 
@@ -137,7 +137,7 @@ const moveTranslate = (point: Point) =>
 export const overlayTransform = ({
   anchor,
   position,
-  offset
+  offset,
 }: OverlayParams) => {
   const res = [];
 

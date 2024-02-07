@@ -9,19 +9,19 @@ describe('Source', () => {
     type: 'geojson',
     data: {
       type: 'FeatureCollection',
-      features: []
-    }
+      features: [],
+    },
   };
 
   it('Should render source with geoJsonSource', () => {
     const mapMock = getMapMock({
-      getSource: jest.fn()
+      getSource: jest.fn(),
     });
     const sourceId = 'source-1';
 
     renderWithMap(
       <Source id={sourceId} geoJsonSource={EMPTY_GEOJSON_SRC} />,
-      mapMock
+      mapMock,
     );
 
     expect(mapMock.addSource.mock.calls[0]).toEqual([
@@ -30,9 +30,9 @@ describe('Source', () => {
         type: 'geojson',
         data: {
           type: 'FeatureCollection',
-          features: []
-        }
-      }
+          features: [],
+        },
+      },
     ]);
   });
 });

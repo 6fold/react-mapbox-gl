@@ -1,5 +1,5 @@
 jest.mock('mapbox-gl', () => ({
-  Map: jest.fn()
+  Map: jest.fn(),
 }));
 
 import { render } from '@testing-library/react';
@@ -21,7 +21,7 @@ const getMock = (override = {}) =>
     getBearing: jest.fn(),
     getPitch: jest.fn(),
     flyTo: jest.fn(),
-    ...override
+    ...override,
   });
 describe('Map', () => {
   beforeEach(() => {
@@ -32,7 +32,7 @@ describe('Map', () => {
   it('Should render the map correctly', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
-      mapInstance: getMock() as any
+      mapInstance: getMock() as any,
     });
     render(<MapboxMap style="" />);
   });
@@ -40,12 +40,12 @@ describe('Map', () => {
   it('Should call fitBounds with the right parameters', () => {
     const fitBoundsValues: FitBounds = [
       [0, 1],
-      [2, 3]
+      [2, 3],
     ];
     const fitBoundsOptions = { linear: true };
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
-      mapInstance: getMock() as any
+      mapInstance: getMock() as any,
     });
 
     render(
@@ -53,15 +53,15 @@ describe('Map', () => {
         style=""
         fitBounds={fitBoundsValues}
         fitBoundsOptions={fitBoundsOptions}
-      />
+      />,
     );
 
     expect(mockfitBounds).toHaveBeenCalledWith(
       fitBoundsValues,
       fitBoundsOptions,
       {
-        fitboundUpdate: true
-      }
+        fitboundUpdate: true,
+      },
     );
   });
 
@@ -69,7 +69,7 @@ describe('Map', () => {
     const flyTo = jest.fn();
     const fitBoundsValues: FitBounds = [
       [0, 1],
-      [2, 3]
+      [2, 3],
     ];
     const fitBoundsOptions = { offset: [150, 0] as [number, number] };
     const newFitBoundsOptions = { offset: [0, 0] as [number, number] };
@@ -78,8 +78,8 @@ describe('Map', () => {
       accessToken: '',
       mapInstance: getMock({
         flyTo,
-        fitBounds: mockfitBounds
-      }) as any
+        fitBounds: mockfitBounds,
+      }) as any,
     });
 
     const { rerender } = render(
@@ -87,7 +87,7 @@ describe('Map', () => {
         style=""
         fitBounds={fitBoundsValues}
         fitBoundsOptions={fitBoundsOptions}
-      />
+      />,
     );
 
     rerender(
@@ -95,7 +95,7 @@ describe('Map', () => {
         style=""
         fitBounds={fitBoundsValues}
         fitBoundsOptions={newFitBoundsOptions}
-      />
+      />,
     );
 
     expect(mockfitBounds.mock.calls[1][1]).toBe(newFitBoundsOptions);
@@ -104,7 +104,7 @@ describe('Map', () => {
   it.skip('Should calc the center from fitbounds if center is not given', () => {
     const fitBoundsValues: FitBounds = [
       [0, 3],
-      [2, 9]
+      [2, 9],
     ];
     const mockMap = getMock() as any;
     const MapboxMap = ReactMapboxGl({ accessToken: '', mapInstance: mockMap });
@@ -118,7 +118,7 @@ describe('Map', () => {
   it('Should listen onStyleLoad event', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
-      mapInstance: getMock() as any
+      mapInstance: getMock() as any,
     });
 
     render(<MapboxMap style="" onStyleLoad={jest.fn()} />);
@@ -132,8 +132,8 @@ describe('Map', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock({
-        flyTo
-      }) as any
+        flyTo,
+      }) as any,
     });
 
     const { rerender } = render(<MapboxMap style="" center={[1, 2]} />);
@@ -147,7 +147,7 @@ describe('Map', () => {
     const flyTo = jest.fn();
     const maxBoundsProps: FitBounds = [
       [1, 0],
-      [0, 1]
+      [0, 1],
     ];
     const mockMaxBounds = jest.fn();
 
@@ -155,8 +155,8 @@ describe('Map', () => {
       accessToken: '',
       mapInstance: getMock({
         setMaxBounds: mockMaxBounds,
-        flyTo
-      }) as any
+        flyTo,
+      }) as any,
     });
 
     const { rerender } = render(<MapboxMap style="" />);
@@ -172,8 +172,8 @@ describe('Map', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock({
-        flyTo
-      }) as any
+        flyTo,
+      }) as any,
     });
 
     const zoom: [number] = [3];
@@ -190,8 +190,8 @@ describe('Map', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock({
-        flyTo
-      }) as any
+        flyTo,
+      }) as any,
     });
 
     const { rerender } = render(<MapboxMap style="" zoom={[1]} />);
@@ -207,8 +207,8 @@ describe('Map', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock({
-        flyTo
-      }) as any
+        flyTo,
+      }) as any,
     });
     const bearing: [number] = [3];
 
@@ -224,8 +224,8 @@ describe('Map', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock({
-        flyTo
-      }) as any
+        flyTo,
+      }) as any,
     });
 
     const { rerender } = render(<MapboxMap style="" bearing={[1]} />);
@@ -241,8 +241,8 @@ describe('Map', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock({
-        flyTo
-      }) as any
+        flyTo,
+      }) as any,
     });
     const pitch: [number] = [3];
 
@@ -258,8 +258,8 @@ describe('Map', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock({
-        flyTo
-      }) as any
+        flyTo,
+      }) as any,
     });
 
     const { rerender } = render(<MapboxMap style="" pitch={[1]} />);
@@ -274,16 +274,16 @@ describe('Map', () => {
     const MapboxMap = ReactMapboxGl({
       accessToken: '',
       mapInstance: getMock({
-        flyTo
-      }) as any
+        flyTo,
+      }) as any,
     });
     const zoom: [number] = [3];
     const flyToOptions = {
       speed: 0.1,
-      curve: 0.9
+      curve: 0.9,
     };
     const animationOptions = {
-      offset: [20, 60]
+      offset: [20, 60],
     };
 
     const { rerender } = render(
@@ -292,7 +292,7 @@ describe('Map', () => {
         zoom={zoom}
         flyToOptions={flyToOptions}
         animationOptions={animationOptions}
-      />
+      />,
     );
 
     rerender(
@@ -301,7 +301,7 @@ describe('Map', () => {
         zoom={[1]}
         flyToOptions={flyToOptions}
         animationOptions={animationOptions}
-      />
+      />,
     );
 
     expect(flyTo.mock.calls[0][0]).toEqual({
@@ -310,7 +310,7 @@ describe('Map', () => {
       bearing: undefined,
       center: { lat: 2, lng: 1 },
       pitch: undefined,
-      zoom: 1
+      zoom: 1,
     });
   });
 });

@@ -7,7 +7,7 @@ import {
   ImageSource,
   VideoSource,
   CanvasSource,
-  Point
+  Point,
 } from 'mapbox-gl';
 
 export interface AnchorOffsetLimits {

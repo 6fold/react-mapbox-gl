@@ -8,7 +8,7 @@ import {
   listenEvents,
   events,
   Listeners,
-  updateEvents
+  updateEvents,
 } from './map-events';
 
 const isEqual = require('deep-equal');
@@ -139,7 +139,7 @@ const ReactMapboxFactory = ({
   bearingSnap = 7,
   antialias = false,
   mapInstance,
-  transformRequest
+  transformRequest,
 }: FactoryParameters) => {
   return class ReactMapboxGl extends React.Component<Props & Events, State> {
     public static defaultProps = {
@@ -150,13 +150,13 @@ const ReactMapboxFactory = ({
       movingMethod: defaultMovingMethod,
       pitch: 0,
       containerStyle: {
-        textAlign: 'left'
-      }
+        textAlign: 'left',
+      },
     };
 
     public state: State = {
       map: mapInstance,
-      ready: false
+      ready: false,
     };
 
     public listeners: Listeners = {};
@@ -167,7 +167,7 @@ const ReactMapboxFactory = ({
 
     public calcCenter = (bounds: FitBounds): [number, number] => [
       (bounds[0][0] + bounds[1][0]) / 2,
-      (bounds[0][1] + bounds[1][1]) / 2
+      (bounds[0][1] + bounds[1][1]) / 2,
     ];
 
     public componentDidMount() {
@@ -180,7 +180,7 @@ const ReactMapboxFactory = ({
         fitBounds,
         fitBoundsOptions,
         bearing,
-        maxBounds
+        maxBounds,
       } = this.props;
 
       (MapboxGl as any).accessToken = accessToken;
@@ -190,7 +190,7 @@ const ReactMapboxFactory = ({
 
       if (!Array.isArray(zoom)) {
         throw new Error(
-          'zoom need to be an array type of length 1 for reliable update'
+          'zoom need to be an array type of length 1 for reliable update',
         );
       }
 
@@ -225,13 +225,13 @@ const ReactMapboxFactory = ({
         bearingSnap,
         failIfMajorPerformanceCaveat,
         antialias,
-        transformRequest
+        transformRequest,
       };
 
       if (bearing) {
         if (!Array.isArray(bearing)) {
           throw new Error(
-            'bearing need to be an array type of length 1 for reliable update'
+            'bearing need to be an array type of length 1 for reliable update',
           );
         }
 
@@ -241,7 +241,7 @@ const ReactMapboxFactory = ({
       if (pitch) {
         if (!Array.isArray(pitch)) {
           throw new Error(
-            'pitch need to be an array type of length 1 for reliable update'
+            'pitch need to be an array type of length 1 for reliable update',
           );
         }
 
@@ -340,7 +340,7 @@ const ReactMapboxFactory = ({
           !isEqual(prevProps.fitBoundsOptions, this.props.fitBoundsOptions)
         ) {
           map.fitBounds(this.props.fitBounds, this.props.fitBoundsOptions, {
-            fitboundUpdate: true
+            fitboundUpdate: true,
           });
         }
       }
@@ -360,7 +360,7 @@ const ReactMapboxFactory = ({
           zoom: didZoomUpdate && this.props.zoom ? this.props.zoom[0] : zoom,
           center: didCenterUpdate ? this.props.center : center,
           bearing: didBearingUpdate ? this.props.bearing : bearing,
-          pitch: didPitchUpdate ? this.props.pitch : pitch
+          pitch: didPitchUpdate ? this.props.pitch : pitch,
         });
       }
 

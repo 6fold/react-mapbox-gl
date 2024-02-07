@@ -2,7 +2,7 @@ import * as MapboxGl from 'mapbox-gl';
 
 export type MapEvent = (
   map: MapboxGl.Map,
-  evt: React.SyntheticEvent<any>
+  evt: React.SyntheticEvent<any>,
 ) => void;
 
 export interface Events {
@@ -95,7 +95,7 @@ export const events: EventMapping = {
   onBoxZoomCancel: 'boxzoomcancel',
   onRotateStart: 'rotatestart',
   onRotate: 'rotate',
-  onRotateEnd: 'rotateend'
+  onRotateEnd: 'rotateend',
 };
 
 export type Listeners = {
@@ -105,7 +105,7 @@ export type Listeners = {
 export const listenEvents = (
   partialEvents: EventMapping,
   props: Partial<Events>,
-  map: MapboxGl.Map
+  map: MapboxGl.Map,
 ) =>
   Object.keys(partialEvents).reduce((listeners, event) => {
     const propEvent = props[event];
@@ -126,11 +126,11 @@ export const listenEvents = (
 export const updateEvents = (
   listeners: Listeners,
   currentProps: Partial<Events>,
-  map: MapboxGl.Map
+  map: MapboxGl.Map,
 ) => {
   const toListenOff = Object.keys(events).filter(
     (eventKey) =>
-      listeners[eventKey] && typeof currentProps[eventKey] !== 'function'
+      listeners[eventKey] && typeof currentProps[eventKey] !== 'function',
   );
 
   toListenOff.forEach((key) => {

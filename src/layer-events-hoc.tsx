@@ -15,7 +15,7 @@ export type OwnProps = EnhancedLayerProps & LayerCommonProps & LayerEvents;
 type LayerChildren = React.ReactElement<FeatureProps> | undefined;
 
 export function layerMouseTouchEvents(
-  WrappedComponent: React.ComponentClass<LayerProps>
+  WrappedComponent: React.ComponentClass<LayerProps>,
 ) {
   return class EnhancedLayer extends React.Component<OwnProps> {
     public hover: number[] = [];
@@ -30,22 +30,22 @@ export function layerMouseTouchEvents(
         .concat(this.props.children)
         .filter(
           (el): el is React.ReactElement<FeatureProps> =>
-            typeof el !== 'undefined'
+            typeof el !== 'undefined',
         );
     public getChildFromId = (
       children: Array<React.ReactElement<FeatureProps>>,
-      id: number
+      id: number,
     ) => children[id];
 
     public areFeaturesDraggable = (
       children: Array<React.ReactElement<FeatureProps>>,
-      featureIds: number[] = this.hover
+      featureIds: number[] = this.hover,
     ) =>
       !!featureIds
         .map((id) =>
           this.getChildFromId(children, id)
             ? this.getChildFromId(children, id)!.props.draggable
-            : false
+            : false,
         )
         .filter(Boolean).length;
 
@@ -88,7 +88,7 @@ export function layerMouseTouchEvents(
           if (onMouseEnter) {
             onMouseEnter({ ...evt, feature, map });
           }
-        }
+        },
       );
 
       if (this.areFeaturesDraggable(children)) {
@@ -167,7 +167,7 @@ export function layerMouseTouchEvents(
       const children = this.getChildren();
       const { map } = this.props;
       const {
-        lngLat: { lng, lat }
+        lngLat: { lng, lat },
       } = evt;
       this.draggedChildren = [];
 
@@ -179,8 +179,8 @@ export function layerMouseTouchEvents(
         if (child && child.props.draggable) {
           this.draggedChildren!.push(
             React.cloneElement(child, {
-              coordinates: [lng, lat]
-            })
+              coordinates: [lng, lat],
+            }),
           );
 
           if (onDrag) {

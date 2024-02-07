@@ -19,12 +19,12 @@ export const getMapMock = (override?: { [key: string]: any }) => ({
   getStyle: jest.fn(),
   getSource: jest.fn().mockReturnValue({ setData: jest.fn() }),
   project: jest.fn(),
-  ...override
+  ...override,
 });
 
 export const renderWithMap = (comp: JSX.Element, mapValue: any) => {
   return render(
-    <MapContext.Provider value={mapValue}>{comp}</MapContext.Provider>
+    <MapContext.Provider value={mapValue}>{comp}</MapContext.Provider>,
   );
 };
 

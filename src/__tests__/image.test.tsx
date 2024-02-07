@@ -23,13 +23,13 @@ describe('Image', () => {
         options={imageOptions}
         onError={onError}
         onLoaded={onLoaded}
-      />
+      />,
     );
 
     expect(mapMock.addImage.mock.calls[0]).toEqual([
       imageId,
       imageData,
-      imageOptions
+      imageOptions,
     ]);
 
     expect(onLoaded).toHaveBeenCalled();
@@ -38,7 +38,7 @@ describe('Image', () => {
 
   it('Should remove image on unmount', () => {
     const mapMock = getMapMock({
-      getStyle: jest.fn(() => ({}))
+      getStyle: jest.fn(() => ({})),
     });
     const onLoaded = jest.fn();
     const onError = jest.fn();
@@ -55,7 +55,7 @@ describe('Image', () => {
         options={imageOptions}
         onError={onError}
         onLoaded={onLoaded}
-      />
+      />,
     );
 
     expect(mapMock.addImage).toHaveBeenCalled();
@@ -67,7 +67,7 @@ describe('Image', () => {
 
   it('Should not call removeImage when map styles are undefined', () => {
     const mapMock = getMapMock({
-      getStyle: jest.fn(() => undefined)
+      getStyle: jest.fn(() => undefined),
     });
 
     const onLoaded = jest.fn();
@@ -85,7 +85,7 @@ describe('Image', () => {
         options={imageOptions}
         onError={onError}
         onLoaded={onLoaded}
-      />
+      />,
     );
 
     expect(onLoaded).toHaveBeenCalled();

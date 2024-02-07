@@ -6,20 +6,20 @@ const { token, styles } = require('./config.json');
 const Map = ReactMapboxGl({ accessToken: token });
 
 const mapStyle = {
-  flex: 1
+  flex: 1,
 };
 
 const paintLayer = {
   'fill-extrusion-color': '#aaa',
   'fill-extrusion-height': {
     type: 'identity' as 'identity',
-    property: 'height'
+    property: 'height',
   },
   'fill-extrusion-base': {
     type: 'identity' as 'identity',
-    property: 'min_height'
+    property: 'min_height',
   },
-  'fill-extrusion-opacity': 0.6
+  'fill-extrusion-opacity': 0.6,
 };
 
 export interface Props {

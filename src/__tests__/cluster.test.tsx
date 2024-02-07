@@ -1,11 +1,11 @@
 jest.mock('mapbox-gl', () => ({
-  Map: {}
+  Map: {},
 }));
 
 jest.mock('../util/overlays', () => ({
   overlayState: jest.fn(() => ({})),
   overlayTransform: jest.fn(() => []),
-  anchors: []
+  anchors: [],
 }));
 
 import * as React from 'react';
@@ -20,35 +20,35 @@ const coordinates: Array<[number, number]> = [
   [-9.26996282865152, 42.92873605781255],
   [-8.969410773822517, 37.03827545780658],
   [11.024180534771233, 37.07398102421283],
-  [-9.273915168353767, 32.58161041874408]
+  [-9.273915168353767, 32.58161041874408],
 ];
 
 const mockProjections = {
   0: {
     toArray() {
       return [-63.41135717118712, 69.80779389260127];
-    }
+    },
   },
   1: {
     toArray() {
       return [120.23846281116113, 69.80779389260127];
-    }
+    },
   },
   2: {
     toArray() {
       return [120.23846281116113, -41.10548333921079];
-    }
+    },
   },
   3: {
     toArray() {
       return [-63.41135717118712, -41.10548333921079];
-    }
+    },
   },
   4: {
     toArray() {
       return [-63.41135717118712, 69.80779389260127];
-    }
-  }
+    },
+  },
 };
 
 describe('cluster', () => {
@@ -66,8 +66,8 @@ describe('cluster', () => {
       getMapMock({
         getZoom: jest.fn(() => 2),
         getCanvas: jest.fn(() => ({ width: 1020, height: 800 })),
-        unproject: jest.fn(() => mockProjections[unprojectCalls++])
-      })
+        unproject: jest.fn(() => mockProjections[unprojectCalls++]),
+      }),
     );
 
     const call = clusterMarkerFactory.mock.calls[0];

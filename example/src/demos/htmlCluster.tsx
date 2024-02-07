@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const {
   token,
-  styles: { outdoor }
+  styles: { outdoor },
 } = require('./config.json');
 
 const falls = require('./falls.json');
@@ -12,7 +12,7 @@ const falls = require('./falls.json');
 const Map = ReactMapboxGl({ accessToken: token });
 
 const mapStyle = {
-  flex: 1
+  flex: 1,
 };
 
 const styles: { [key: string]: React.CSSProperties } = {
@@ -26,7 +26,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: 'center',
     color: 'white',
     border: '2px solid #56C498',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
   marker: {
     width: 30,
@@ -36,8 +36,8 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    border: '2px solid #C9C9C9'
-  }
+    border: '2px solid #C9C9C9',
+  },
 };
 
 const StyledPopup = styled.div`
@@ -62,7 +62,7 @@ export interface Props {
 
 class HtmlCluster extends React.Component<Props, State> {
   public state: State = {
-    popup: undefined
+    popup: undefined,
   };
 
   private zoom: [number] = [4];
@@ -72,8 +72,8 @@ class HtmlCluster extends React.Component<Props, State> {
     pointCount: number,
     getLeaves: (
       limit?: number,
-      offset?: number
-    ) => Array<React.ReactElement<any>>
+      offset?: number,
+    ) => Array<React.ReactElement<any>>,
   ) => (
     <Marker
       key={coordinates.toString()}
@@ -96,15 +96,15 @@ class HtmlCluster extends React.Component<Props, State> {
     total: number,
     getLeaves: (
       limit?: number,
-      offset?: number
-    ) => Array<React.ReactElement<any>>
+      offset?: number,
+    ) => Array<React.ReactElement<any>>,
   ) => {
     this.setState({
       popup: {
         coordinates,
         total,
-        leaves: getLeaves()
-      }
+        leaves: getLeaves(),
+      },
     });
   };
 
@@ -147,7 +147,7 @@ class HtmlCluster extends React.Component<Props, State> {
                   <div key={index}>
                     {leaf.props['data-feature'].properties.name}
                   </div>
-                )
+                ),
               )}
               {popup.total > popup.leaves.length ? (
                 <div>And more...</div>

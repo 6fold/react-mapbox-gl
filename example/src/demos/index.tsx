@@ -44,14 +44,14 @@ class Demos extends React.Component<{}, State> {
   public state: State = {
     selectedDemoIndex: parseInt(
       localStorage.getItem('selectedDemoIndex') || '0',
-      10
+      10,
     ),
-    showLive: true
+    showLive: true,
   };
 
   private onSelectExample = (index: number) => {
     this.setState({
-      selectedDemoIndex: index
+      selectedDemoIndex: index,
     });
 
     localStorage.setItem('selectedDemoIndex', JSON.stringify(index));
@@ -66,13 +66,13 @@ class Demos extends React.Component<{}, State> {
 
   private onToggleLive = () => {
     this.setState({
-      showLive: !this.state.showLive
+      showLive: !this.state.showLive,
     });
   };
 
   private onStyleLoad = (map: any) => {
     this.setState({
-      map
+      map,
     });
   };
 

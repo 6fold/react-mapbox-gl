@@ -14,8 +14,8 @@ export interface Props {
     pointCount: number,
     getLeaves: (
       limit?: number,
-      offset?: number
-    ) => Array<React.ReactElement<MarkerProps> | undefined>
+      offset?: number,
+    ) => Array<React.ReactElement<MarkerProps> | undefined>,
   ): React.ReactElement<MarkerProps>;
   radius?: number;
   maxZoom?: number;
@@ -46,7 +46,7 @@ export class Cluster extends React.Component<Props, State> {
     nodeSize: 64,
     log: false,
     zoomOnClick: false,
-    zoomOnClickPadding: 20
+    zoomOnClickPadding: 20,
   };
 
   public state: State = {
@@ -56,9 +56,9 @@ export class Cluster extends React.Component<Props, State> {
       minZoom: this.props.minZoom,
       extent: this.props.extent,
       nodeSize: this.props.nodeSize,
-      log: this.props.log
+      log: this.props.log,
     }),
-    clusterPoints: []
+    clusterPoints: [],
   };
 
   private featureClusterMap = new WeakMap<
@@ -95,7 +95,7 @@ export class Cluster extends React.Component<Props, State> {
   }
 
   private childrenChange = (
-    newChildren: Array<React.ReactElement<MarkerProps>>
+    newChildren: Array<React.ReactElement<MarkerProps>>,
   ) => {
     const { superC } = this.state;
     this.featureClusterMap = new WeakMap<
@@ -120,7 +120,7 @@ export class Cluster extends React.Component<Props, State> {
     const downLeft = map.unproject([0, h]).toArray();
     const newPoints = superC.getClusters(
       bbox(polygon([[upLeft, upRight, downRight, downLeft, upLeft]])),
-      Math.round(zoom)
+      Math.round(zoom),
     );
     if (newPoints.length !== clusterPoints.length || forceSetState) {
       this.setState({ clusterPoints: newPoints });
@@ -132,14 +132,14 @@ export class Cluster extends React.Component<Props, State> {
       type: 'Feature' as const,
       geometry: {
         type: 'Point' as const,
-        coordinates
+        coordinates,
       },
-      properties: {}
+      properties: {},
     };
   }
 
   private childrenToFeatures = (
-    children: Array<React.ReactElement<MarkerProps>>
+    children: Array<React.ReactElement<MarkerProps>>,
   ) =>
     children.map((child) => {
       const feature = this.feature(child && child.props.coordinates);
@@ -150,14 +150,14 @@ export class Cluster extends React.Component<Props, State> {
   private getLeaves = (
     feature: GeoJSON.Feature,
     limit?: number,
-    offset?: number
+    offset?: number,
   ) => {
     const { superC } = this.state;
     return superC
       .getLeaves(
         feature.properties && feature.properties.cluster_id,
         limit || Infinity,
-        offset
+        offset,
       )
       .map((leave: GeoJSON.Feature) => this.featureClusterMap.get(leave));
   };
@@ -166,7 +166,7 @@ export class Cluster extends React.Component<Props, State> {
     const markers = Array.prototype.slice.call(event.currentTarget.children);
     const marker = this.findMarkerElement(
       event.currentTarget,
-      event.target as HTMLElement
+      event.target as HTMLElement,
     );
     const index = markers.indexOf(marker);
     const cluster = this.state.clusterPoints[index] as GeoJSON.Feature;
@@ -175,18 +175,18 @@ export class Cluster extends React.Component<Props, State> {
     }
     const children = this.state.superC.getLeaves(
       cluster.properties && cluster.properties.cluster_id,
-      Infinity
+      Infinity,
     );
     const childrenBbox = bbox(featureCollection(children));
     // https://github.com/mapbox/mapbox-gl-js/issues/5249
     this.props.map.fitBounds(LngLatBounds.convert(childrenBbox as any), {
-      padding: this.props.zoomOnClickPadding!
+      padding: this.props.zoomOnClickPadding!,
     });
   };
 
   private findMarkerElement(
     target: HTMLElement,
-    element: HTMLElement
+    element: HTMLElement,
   ): HTMLElement {
     if (element.parentElement === target) {
       return element;
@@ -210,7 +210,7 @@ export class Cluster extends React.Component<Props, State> {
             return ClusterMarkerFactory(
               feature.geometry.coordinates,
               feature.properties.point_count,
-              this.getLeaves.bind(this, feature)
+              this.getLeaves.bind(this, feature),
             );
           }
           return this.featureClusterMap.get(feature);

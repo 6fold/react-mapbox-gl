@@ -27,14 +27,14 @@ export const sections = [
     title: 'Bike stations in London',
     components: ['ReactMapboxGl', 'Layer', 'Feature'],
     DemoComponent: LondonCycleMap,
-    reactLive: <Live full={true} raw={LondonCycleMapRaw} />
+    reactLive: <Live full={true} raw={LondonCycleMapRaw} />,
   },
   {
     shortTitle: 'heatmap',
     title: 'Heatmap of London house prices',
     components: ['ReactMapboxGl', 'Layer', 'Feature'],
     DemoComponent: Heatmap,
-    reactLive: <Live full={true} raw={HeatmapRaw} />
+    reactLive: <Live full={true} raw={HeatmapRaw} />,
   },
   {
     shortTitle: 'all-shapes',
@@ -45,51 +45,51 @@ export const sections = [
       'Feature',
       'ScaleControl',
       'ZoomControl',
-      'RotationControl'
+      'RotationControl',
     ],
     DemoComponent: AllShapes,
-    reactLive: <Live full={true} raw={AllShapesRaw} />
+    reactLive: <Live full={true} raw={AllShapesRaw} />,
   },
   {
     shortTitle: 'html-marker',
     title: 'Html features (Marker)',
     components: ['ReactMapboxGl', 'Marker'],
     DemoComponent: HtmlFeatures,
-    reactLive: <Live full={true} raw={HtmlFeaturesRaw} />
+    reactLive: <Live full={true} raw={HtmlFeaturesRaw} />,
   },
   {
     shortTitle: '3d-map',
     title: '3D extrusion map',
     components: ['ReactMapboxGl', 'Layer'],
     DemoComponent: ThreeDMap,
-    reactLive: <Live full={true} raw={ThreeDMapRaw} />
+    reactLive: <Live full={true} raw={ThreeDMapRaw} />,
   },
   {
     shortTitle: 'html-cluster',
     title: 'Cluster of Html markers',
     components: ['ReactMapboxGl', 'Marker', 'Cluster'],
     DemoComponent: HtmlCluster,
-    reactLive: <Live full={true} raw={HtmlClusterRaw} />
+    reactLive: <Live full={true} raw={HtmlClusterRaw} />,
   },
   {
     shortTitle: 'switch-style',
     title: 'Swap Mapbox map style',
     components: ['ReactMapboxGl', 'Source', 'Layer', 'Feature'],
     DemoComponent: SwitchStyle,
-    reactLive: <Live full={true} raw={SwitchStyleRaw} />
+    reactLive: <Live full={true} raw={SwitchStyleRaw} />,
   },
   {
     shortTitle: 'geojson-data',
     title: 'Display data from GeoJson',
     components: ['ReactMapboxGl', 'GeoJsonLayer'],
     DemoComponent: GeoJsonLayer,
-    reactLive: <Live full={true} raw={GeoJsonLayerRaw} />
+    reactLive: <Live full={true} raw={GeoJsonLayerRaw} />,
   },
   {
     shortTitle: 'vector-source',
     title: 'Display data from vector tile',
     components: ['ReactMapboxGl', 'Source', 'Layer'],
     DemoComponent: VectorLayer,
-    reactLive: <Live full={true} raw={VectorLayerRaw} />
-  }
+    reactLive: <Live full={true} raw={VectorLayerRaw} />,
+  },
 ];

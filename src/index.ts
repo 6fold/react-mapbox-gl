@@ -29,7 +29,7 @@ export {
   Cluster,
   RotationControl,
   Image,
-  MapContext
+  MapContext,
 };
 
 export default Map;

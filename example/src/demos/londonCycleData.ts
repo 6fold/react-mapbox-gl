@@ -19,12 +19,12 @@ const normalize = (station: any) => ({
   name: station.name[0],
   position: [parseFloat(station.long[0]), parseFloat(station.lat[0])],
   bikes: parseInt(station.nbBikes[0], 10),
-  slots: parseInt(station.nbDocks[0], 10)
+  slots: parseInt(station.nbDocks[0], 10),
 });
 
 export const getCycleStations = () =>
   fetch(
-    'https://tfl.gov.uk/tfl/syndication/feeds/cycle-hire/livecyclehireupdates.xml'
+    'https://tfl.gov.uk/tfl/syndication/feeds/cycle-hire/livecyclehireupdates.xml',
   )
     .then((res) => res.text())
     .then(parse)
@@ -33,5 +33,5 @@ export const getCycleStations = () =>
       stations.reduce((acc: StationDict, station) => {
         acc[station.id] = station;
         return acc;
-      }, {})
+      }, {}),
     );

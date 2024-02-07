@@ -9,22 +9,22 @@ const geojson = require('./geojson.json');
 const Map = ReactMapboxGl({ accessToken: token });
 
 const mapStyle = {
-  flex: 1
+  flex: 1,
 };
 
 const symbolLayout: MapboxGL.SymbolLayout = {
   'text-field': '{place}',
   'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
   'text-offset': [0, 0.6],
-  'text-anchor': 'top'
+  'text-anchor': 'top',
 };
 const symbolPaint: MapboxGL.SymbolPaint = {
-  'text-color': 'white'
+  'text-color': 'white',
 };
 
 const circleLayout: MapboxGL.CircleLayout = { visibility: 'visible' };
 const circlePaint: MapboxGL.CirclePaint = {
-  'circle-color': 'white'
+  'circle-color': 'white',
 };
 
 export interface Props {

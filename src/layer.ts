@@ -18,7 +18,7 @@ export type ImageDefinition = [string, HTMLImageElement];
 export type ImageDefinitionWithOptions = [
   string,
   HTMLImageElement,
-  ImageOptions
+  ImageOptions,
 ];
 
 export type MouseEvent = (evt: any) => any;
@@ -84,14 +84,14 @@ const eventToHandler: EventToHandlersType = {
   mouseleave: 'onMouseLeave',
   mousedown: 'onMouseDown',
   mouseup: 'onMouseUp',
-  click: 'onClick'
+  click: 'onClick',
 };
 
 export default class Layer extends React.Component<Props> {
   public static defaultProps = {
     type: 'symbol' as const,
     layout: {},
-    paint: {}
+    paint: {},
   };
 
   private source: MapboxGL.GeoJSONSourceRaw = {
@@ -99,8 +99,8 @@ export default class Layer extends React.Component<Props> {
     ...this.props.geoJSONSourceOptions,
     data: {
       type: 'FeatureCollection',
-      features: []
-    }
+      features: [],
+    },
   };
 
   private geometry = (coordinates: any): GeoJSON.Geometry => {
@@ -109,42 +109,42 @@ export default class Layer extends React.Component<Props> {
       case 'circle':
         return {
           type: 'Point',
-          coordinates
+          coordinates,
         };
 
       case 'fill':
         if (Array.isArray(coordinates[0][0][0])) {
           return {
             type: 'MultiPolygon',
-            coordinates
+            coordinates,
           };
         }
         return {
           type: 'Polygon',
-          coordinates
+          coordinates,
         };
 
       case 'line':
         return {
           type: 'LineString',
-          coordinates
+          coordinates,
         };
 
       default:
         return {
           type: 'Point',
-          coordinates
+          coordinates,
         };
     }
   };
 
   private makeFeature = (
     props: FeatureProps,
-    id: number
+    id: number,
   ): GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties> => ({
     type: 'Feature',
     geometry: this.geometry(props.coordinates),
-    properties: { ...props.properties, id }
+    properties: { ...props.properties, id },
   });
 
   private initialize = () => {
@@ -160,7 +160,7 @@ export default class Layer extends React.Component<Props> {
       sourceLayer,
       minZoom,
       maxZoom,
-      filter
+      filter,
     } = this.props;
     const { map } = this.props;
 
@@ -172,7 +172,7 @@ export default class Layer extends React.Component<Props> {
       layout,
       // TODO: Fix mapbox-gl types
       paint: paint as any,
-      metadata
+      metadata,
     };
 
     if (sourceLayer) {
@@ -338,7 +338,7 @@ export default class Layer extends React.Component<Props> {
     if (Array.isArray(children)) {
       return children.reduce(
         (arr, next) => arr.concat(next),
-        [] as JSX.Element[]
+        [] as JSX.Element[],
       );
     }
 
@@ -366,13 +366,13 @@ export default class Layer extends React.Component<Props> {
       .filter(Boolean);
 
     const source = map.getSource(
-      sourceId || this.props.id
+      sourceId || this.props.id,
     ) as MapboxGL.GeoJSONSource;
 
     if (source && !sourceId && source.setData) {
       source.setData({
         type: 'FeatureCollection',
-        features: features as GeoJSON.Feature[]
+        features: features as GeoJSON.Feature[],
       });
     }
 

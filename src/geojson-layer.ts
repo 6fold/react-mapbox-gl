@@ -12,7 +12,7 @@ const types = ['symbol', 'line', 'fill', 'fill-extrusion', 'circle'];
 const toCamelCase = (str: string) =>
   str
     .replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) =>
-      index === 0 ? letter.toLowerCase() : letter.toUpperCase()
+      index === 0 ? letter.toLowerCase() : letter.toUpperCase(),
     )
     .replace(/[\s+]|-/g, '');
 
@@ -22,7 +22,7 @@ const eventToHandler = {
   mouseleave: 'OnMouseLeave',
   mousedown: 'OnMouseDown',
   mouseup: 'OnMouseUp',
-  click: 'OnClick'
+  click: 'OnClick',
 };
 
 export type MouseEvent = (evt: any) => any;
@@ -123,7 +123,7 @@ export class GeoJSONLayer extends React.Component<Props> {
   private source: Sources = {
     type: 'geojson',
     ...this.props.sourceOptions,
-    data: this.props.data
+    data: this.props.data,
   } as any;
 
   private layerIds: string[] = [];
@@ -143,7 +143,7 @@ export class GeoJSONLayer extends React.Component<Props> {
     // default undefined layers to invisible
     const visibility = Object.keys(paint).length ? 'visible' : 'none';
     const layout: Layouts = this.props[`${toCamelCase(type)}Layout`] || {
-      visibility
+      visibility,
     };
 
     const layer: MapboxGL.Layer = {
@@ -154,7 +154,7 @@ export class GeoJSONLayer extends React.Component<Props> {
       // TODO: Fix mapbox-gl types
       paint: paint as any,
       layout,
-      ...layerOptions
+      ...layerOptions,
     };
 
     map.addLayer(layer, before);
@@ -253,7 +253,7 @@ export class GeoJSONLayer extends React.Component<Props> {
   }
 
   public isGeoJSONSource = (
-    source?: Sources
+    source?: Sources,
   ): source is MapboxGL.GeoJSONSource =>
     !!source &&
     typeof (source as MapboxGL.GeoJSONSource).setData === 'function';
@@ -271,7 +271,7 @@ export class GeoJSONLayer extends React.Component<Props> {
       this.source = {
         type: 'geojson',
         ...this.props.sourceOptions,
-        data: this.props.data
+        data: this.props.data,
       } as any;
     }
 

@@ -4,7 +4,7 @@ import ReactMapboxGl, {
   ZoomControl,
   RotationControl,
   Layer,
-  Feature
+  Feature,
 } from '../../../';
 import { AllShapesPolygonCoords, AllShapesMultiPolygonCoords } from './data';
 
@@ -23,33 +23,33 @@ interface Route {
 const route: Route = require('./route.json');
 
 const mappedRoute = route.points.map(
-  (point) => [point.lng, point.lat] as [number, number]
+  (point) => [point.lng, point.lat] as [number, number],
 );
 
 const Map = ReactMapboxGl({ accessToken: token });
 
 const mapStyle = {
-  flex: 1
+  flex: 1,
 };
 
 const lineLayout = {
   'line-cap': 'round' as 'round',
-  'line-join': 'round' as 'round'
+  'line-join': 'round' as 'round',
 };
 
 const linePaint = {
   'line-color': '#4790E5',
-  'line-width': 12
+  'line-width': 12,
 };
 
 const polygonPaint = {
   'fill-color': '#6F788A',
-  'fill-opacity': 0.7
+  'fill-opacity': 0.7,
 };
 
 const multiPolygonPaint = {
   'fill-color': '#3bb2d0',
-  'fill-opacity': 0.5
+  'fill-opacity': 0.5,
 };
 
 export interface State {
@@ -68,7 +68,7 @@ class AllShapes extends React.Component<Props, State> {
     center: [-0.120736, 51.5118219],
     zoom: [8],
     circleRadius: 30,
-    routeIndex: 0
+    routeIndex: 0,
   };
 
   private intervalHandle: any = undefined;
@@ -82,7 +82,7 @@ class AllShapes extends React.Component<Props, State> {
         this.setState({
           center: mappedRoute[0],
           zoom: [10],
-          circleRadius: 10
+          circleRadius: 10,
         });
       }
     }, 3000);
@@ -90,7 +90,7 @@ class AllShapes extends React.Component<Props, State> {
     this.intervalHandle = setInterval(() => {
       if (this.mounted) {
         this.setState({
-          routeIndex: this.state.routeIndex + 1
+          routeIndex: this.state.routeIndex + 1,
         });
       }
     }, 8000);
@@ -104,7 +104,7 @@ class AllShapes extends React.Component<Props, State> {
   private getCirclePaint = () => ({
     'circle-radius': this.state.circleRadius,
     'circle-color': '#E54E52',
-    'circle-opacity': 0.8
+    'circle-opacity': 0.8,
   });
 
   private onStyleLoad = (map: any) => {

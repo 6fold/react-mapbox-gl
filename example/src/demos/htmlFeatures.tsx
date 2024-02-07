@@ -26,7 +26,7 @@ const Map = ReactMapboxGl({ accessToken: token });
 
 const mapStyle = {
   width: '100%',
-  height: '100%'
+  height: '100%',
 };
 
 export interface Place {
@@ -48,9 +48,9 @@ const req = (url: string, body?: any, method = 'GET') =>
     headers: new Headers({
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Accept-Charset': 'utf-8'
+      'Accept-Charset': 'utf-8',
     }),
-    body
+    body,
   });
 
 export interface Props {
@@ -62,7 +62,7 @@ class HtmlFeatures extends React.Component<Props, State> {
     query: '',
     options: [],
     selected: undefined,
-    center: [-0.1148677, 51.5139573]
+    center: [-0.1148677, 51.5139573],
   };
 
   private fetch = (query: string) => {
@@ -75,8 +75,8 @@ class HtmlFeatures extends React.Component<Props, State> {
             .map((poi: any) => ({
               id: poi.id,
               center: poi.center,
-              name: poi.text
-            }))
+              name: poi.text,
+            })),
         });
       });
   };
@@ -85,7 +85,7 @@ class HtmlFeatures extends React.Component<Props, State> {
     const selected = this.state.options[index];
     this.setState({
       selected,
-      center: selected.center
+      center: selected.center,
     });
   };
 

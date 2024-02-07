@@ -25,14 +25,14 @@ const scales = [
   1000,
   2 * 1000,
   5 * 1000,
-  10 * 1000
+  10 * 1000,
 ];
 
 const positions = {
   'top-right': { top: 10, right: 10, bottom: 'auto', left: 'auto' },
   'top-left': { top: 10, left: 10, bottom: 'auto', right: 'auto' },
   'bottom-right': { bottom: 10, right: 10, top: 'auto', left: 'auto' },
-  'bottom-left': { bottom: 10, left: 10, top: 'auto', right: 'auto' }
+  'bottom-left': { bottom: 10, left: 10, top: 'auto', right: 'auto' },
 };
 
 const containerStyle: React.CSSProperties = {
@@ -46,7 +46,7 @@ const containerStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'baseline',
-  padding: '3px 7px'
+  padding: '3px 7px',
 };
 
 const scaleStyle = {
@@ -55,7 +55,7 @@ const scaleStyle = {
   borderTop: 'none',
   height: 7,
   borderBottomLeftRadius: 1,
-  borderBottomRightRadius: 1
+  borderBottomRightRadius: 1,
 };
 
 const POSITIONS = Object.keys(positions) as AnchorLimits[];
@@ -86,12 +86,12 @@ export interface State {
 export class ScaleControl extends React.Component<Props, State> {
   public static defaultProps = {
     measurement: MEASUREMENTS[0],
-    position: POSITIONS[2]
+    position: POSITIONS[2],
   };
 
   public state = {
     chosenScale: 0,
-    scaleWidth: MIN_WIDTH_SCALE
+    scaleWidth: MIN_WIDTH_SCALE,
   };
 
   public componentDidMount() {
@@ -119,7 +119,7 @@ export class ScaleControl extends React.Component<Props, State> {
     const totalWidth = this._getDistanceTwoPoints(
       [_sw.lng, _ne.lat],
       [_ne.lng, _ne.lat],
-      measurement
+      measurement,
     );
 
     const relativeWidth = (totalWidth / clientWidth) * MIN_WIDTH_SCALE;
@@ -136,7 +136,7 @@ export class ScaleControl extends React.Component<Props, State> {
 
     this.setState({
       chosenScale,
-      scaleWidth
+      scaleWidth,
     });
   };
 

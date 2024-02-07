@@ -9,13 +9,13 @@ describe('ScaleControl', () => {
       <ScaleControl />,
       getMapMock({
         _canvas: {
-          clientwidth: 900
+          clientwidth: 900,
         },
         getBounds: jest.fn().mockReturnValue({
           _ne: { lng: 0, lat: 0 },
-          _sw: { lng: 0, lat: 0 }
-        })
-      })
+          _sw: { lng: 0, lat: 0 },
+        }),
+      }),
     );
   });
 });

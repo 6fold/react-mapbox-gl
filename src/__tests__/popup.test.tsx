@@ -1,11 +1,11 @@
 jest.mock('mapbox-gl', () => ({
-  Map: {}
+  Map: {},
 }));
 
 jest.mock('../util/overlays', () => ({
   overlayState: jest.fn(() => ({})),
   overlayTransform: jest.fn(() => []),
-  anchors: []
+  anchors: [],
 }));
 
 import * as React from 'react';
@@ -17,7 +17,7 @@ describe('Popup', () => {
   it('Should render component', () => {
     const { container } = renderWithMap(
       <Popup coordinates={[0, 0]} />,
-      getMapMock()
+      getMapMock(),
     );
     expect(container).toBeDefined();
   });
@@ -25,7 +25,7 @@ describe('Popup', () => {
   it('Should add custom className', () => {
     const { container } = renderWithMap(
       <Popup className="custom-classname" coordinates={[0, 0]} />,
-      getMapMock()
+      getMapMock(),
     );
 
     expect(container.querySelectorAll('.custom-classname')).toHaveLength(1);
@@ -34,12 +34,12 @@ describe('Popup', () => {
   it('Should concat custom className to defaultClassName', () => {
     const { container } = renderWithMap(
       <Popup className="custom-classname" coordinates={[0, 0]} />,
-      getMapMock()
+      getMapMock(),
     );
 
     expect(container.querySelectorAll('.custom-classname')[0]).toHaveAttribute(
       'class',
-      `custom-classname ${defaultClassName[0]} `
+      `custom-classname ${defaultClassName[0]} `,
     );
   });
 });

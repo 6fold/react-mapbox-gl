@@ -3,11 +3,11 @@ import diff from '../util/diff';
 describe('diff', () => {
   it('Should return no differences', () => {
     const obj1 = {
-      key1: 0
+      key1: 0,
     };
 
     const obj2 = {
-      key1: 0
+      key1: 0,
     };
 
     const res = diff(obj1, obj2);
@@ -17,11 +17,11 @@ describe('diff', () => {
 
   it('Should return one difference', () => {
     const obj1 = {
-      key1: 0
+      key1: 0,
     };
 
     const obj2 = {
-      key1: 1
+      key1: 1,
     };
 
     const res = diff(obj1, obj2);
@@ -31,7 +31,7 @@ describe('diff', () => {
 
   it('Should return 1 removed key', () => {
     const obj1 = {
-      key1: 0
+      key1: 0,
     };
 
     const obj2 = {};
@@ -45,7 +45,7 @@ describe('diff', () => {
     const obj1 = {};
 
     const obj2 = {
-      key1: 0
+      key1: 0,
     };
 
     const res = diff(obj1, obj2);
@@ -55,11 +55,11 @@ describe('diff', () => {
 
   it('Should return 1 removed and 1 added key', () => {
     const obj1 = {
-      key1: 0
+      key1: 0,
     };
 
     const obj2 = {
-      key2: 0
+      key2: 0,
     };
 
     const res = diff(obj1, obj2);

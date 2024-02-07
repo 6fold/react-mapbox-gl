@@ -7,7 +7,7 @@ describe('GeoJSONLayer', () => {
   const fillPaint = { 'fill-color': '#001122' };
   const data: GeoJSON.FeatureCollection = {
     type: 'FeatureCollection',
-    features: []
+    features: [],
   };
 
   it('Should call addLayer with provided layerOptions', () => {
@@ -24,7 +24,7 @@ describe('GeoJSONLayer', () => {
     renderWithMap(GeoJSONLayerComp, mapMock);
 
     const addFillLayerCall = mapMock.addLayer.mock.calls.find(([call]) =>
-      call.id.endsWith('-fill')
+      call.id.endsWith('-fill'),
     );
 
     expect(addFillLayerCall).toEqual([
@@ -34,9 +34,9 @@ describe('GeoJSONLayer', () => {
         type: 'fill',
         layout: { visibility: 'visible' },
         minzoom: 13,
-        paint: { 'fill-color': '#001122' }
+        paint: { 'fill-color': '#001122' },
       },
-      undefined
+      undefined,
     ]);
   });
 
@@ -47,7 +47,7 @@ describe('GeoJSONLayer', () => {
     renderWithMap(GeoJSONLayerComp, mapMock);
 
     const addFillLayerCall = mapMock.addLayer.mock.calls.find(([call]) =>
-      call.id.endsWith('-fill')
+      call.id.endsWith('-fill'),
     );
 
     expect(addFillLayerCall).toEqual([
@@ -56,9 +56,9 @@ describe('GeoJSONLayer', () => {
         source: 'geojson-2',
         type: 'fill',
         layout: { visibility: 'visible' },
-        paint: { 'fill-color': '#001122' }
+        paint: { 'fill-color': '#001122' },
       },
-      undefined
+      undefined,
     ]);
   });
 

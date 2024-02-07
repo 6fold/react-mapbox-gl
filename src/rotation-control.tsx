@@ -10,14 +10,14 @@ const containerStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   boxShadow: '0px 1px 4px rgba(0, 0, 0, .3)',
-  border: '1px solid rgba(0, 0, 0, 0.1)'
+  border: '1px solid rgba(0, 0, 0, 0.1)',
 };
 
 const positions = {
   'top-right': { top: 62, right: 10, bottom: 'auto', left: 'auto' },
   'top-left': { top: 62, left: 10, bottom: 'auto', right: 'auto' },
   'bottom-right': { bottom: 63, right: 10, top: 'auto', left: 'auto' },
-  'bottom-left': { bottom: 63, left: 10, top: 'auto', right: 'auto' }
+  'bottom-left': { bottom: 63, left: 10, top: 'auto', right: 'auto' },
 };
 
 const buttonStyle = {
@@ -29,12 +29,12 @@ const buttonStyle = {
   height: 26,
   width: 26,
   outline: 0,
-  padding: 3
+  padding: 3,
 };
 
 const buttonStyleHovered = {
   backgroundColor: '#fff',
-  opacity: 1
+  opacity: 1,
 };
 
 const buttonStyleCompass = {
@@ -42,7 +42,7 @@ const buttonStyleCompass = {
   borderTopLeftRadius: 2,
   borderTopRightRadius: 2,
   borderBottomLeftRadius: 2,
-  borderBottomRightRadius: 2
+  borderBottomRightRadius: 2,
 };
 
 const Icon = () => (
@@ -55,7 +55,7 @@ const Icon = () => (
 const compassSpan = {
   width: 20,
   height: 20,
-  display: 'inline-block'
+  display: 'inline-block',
 };
 
 const [COMPASS] = [0];
@@ -75,11 +75,11 @@ export interface State {
 
 export class RotationControl extends React.Component<Props, State> {
   public static defaultProps = {
-    position: POSITIONS[0]
+    position: POSITIONS[0],
   };
 
   public state = {
-    hover: undefined
+    hover: undefined,
   };
 
   public componentDidMount() {
@@ -129,7 +129,7 @@ export class RotationControl extends React.Component<Props, State> {
     const controlStyle = {
       ...buttonStyle,
       ...buttonStyleCompass,
-      ...(hover === COMPASS ? buttonStyleHovered : {})
+      ...(hover === COMPASS ? buttonStyleHovered : {}),
     };
 
     return (

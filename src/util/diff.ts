@@ -5,7 +5,7 @@ const diff = (obj1: any, obj2: any) => {
       if (obj1[key] !== obj2[key]) {
         toMutate[key] = obj2[key];
       }
-    }
+    },
   );
   return toMutate;
 };
