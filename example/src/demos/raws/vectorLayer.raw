@@ -44,7 +44,7 @@ const BottomBar = styled.div`
 
 const mapStyle = {
   height: '100%',
-  width: '100%'
+  width: '100%',
 };
 
 export interface Props {
@@ -53,12 +53,12 @@ export interface Props {
 
 const lineLayout = {
   'line-cap': 'round' as 'round',
-  'line-join': 'round' as 'round'
+  'line-join': 'round' as 'round',
 };
 
 const linePaint = {
   'line-color': '#4790E5',
-  'line-width': 2
+  'line-width': 2,
 };
 
 export interface State {
@@ -67,7 +67,7 @@ export interface State {
 
 export default class VectorLayer extends React.Component<Props> {
   public state: State = {
-    render: 'mapillary'
+    render: 'mapillary',
   };
 
   private onStyleLoad = (map: any) => {
@@ -95,7 +95,7 @@ export default class VectorLayer extends React.Component<Props> {
               type: 'vector',
               tiles: [tileUrl],
               minzoom: 6,
-              maxzoom: 14
+              maxzoom: 14,
             }}
           />
           <Layer

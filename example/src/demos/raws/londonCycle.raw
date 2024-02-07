@@ -10,11 +10,11 @@ const { token, styles } = require('./config.json');
 const Mapbox = ReactMapboxGl({
   minZoom: 8,
   maxZoom: 15,
-  accessToken: token
+  accessToken: token,
 });
 
 const mapStyle = {
-  flex: 1
+  flex: 1,
 };
 
 // Define layout to use in Layer component
@@ -42,7 +42,7 @@ export interface State {
 }
 
 const flyToOptions = {
-  speed: 0.8
+  speed: 0.8,
 };
 
 export interface Props {
@@ -55,7 +55,7 @@ export default class LondonCycle extends React.Component<Props, State> {
     center: [-0.109970527, 51.52916347],
     zoom: [11],
     station: undefined,
-    stations: {}
+    stations: {},
   };
 
   public UNSAFE_componentWillMount() {
@@ -63,8 +63,8 @@ export default class LondonCycle extends React.Component<Props, State> {
       this.setState(({ stations }) => ({
         stations: {
           ...stations,
-          ...res
-        }
+          ...res,
+        },
       }));
     });
   }
@@ -83,7 +83,7 @@ export default class LondonCycle extends React.Component<Props, State> {
     this.setState({
       center: feature.geometry.coordinates,
       zoom: [14],
-      station
+      station,
     });
   };
 
@@ -114,19 +114,19 @@ export default class LondonCycle extends React.Component<Props, State> {
               onMouseEnter={
                 this.onToggleHover.bind(
                   this,
-                  'pointer'
+                  'pointer',
                 ) as unknown as React.MouseEventHandler<HTMLElement>
               }
               onMouseLeave={
                 this.onToggleHover.bind(
                   this,
-                  ''
+                  '',
                 ) as unknown as React.MouseEventHandler<HTMLElement>
               }
               onClick={
                 this.markerClick.bind(
                   this,
-                  stations[stationK]
+                  stations[stationK],
                 ) as unknown as React.MouseEventHandler<HTMLElement>
               }
               coordinates={stations[stationK].position}
